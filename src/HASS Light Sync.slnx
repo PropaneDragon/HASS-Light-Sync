@@ -1,6 +1,0 @@
-<Solution>
-  <Project Path="LightSync.Abstractions/LightSync.Abstractions.csproj" />
-  <Project Path="LightSync.Core/LightSync.Core.csproj" />
-  <Project Path="LightSync.Tests/LightSync.Tests.csproj" />
-  <Project Path="LightSync.UI/LightSync.UI.csproj" />
-</Solution>

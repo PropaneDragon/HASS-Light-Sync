@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="9.3.4" />
     <PackageReference Include="Avalonia" Version="12.1.4" />
     <PackageReference Include="Avalonia.Desktop" Version="12.1.4" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.4" />
@@ -34,4 +35,23 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.13" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LightSync.API\LightSync.API.csproj" />
+    <ProjectReference Include="..\LightSync.Core\LightSync.Core.csproj" />
+    <ProjectReference Include="..\LightSync.HomeAssistant\LightSync.HomeAssistant.csproj" ReferenceOutputAssembly="false" BundledPlugin="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Pages\HomePageView.axaml.cs">
+      <DependentUpon>HomePageView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <Target Name="BundlePlugins" AfterTargets="Build" Condition="'$(DesignTimeBuild)' != 'true'">
+    <ItemGroup>
+      <_Plugin Include="@(ProjectReference-&gt;WithMetadataValue('BundledPlugin', 'true'))" />
+    </ItemGroup>
+    <MSBuild Projects="@(_Plugin)" Targets="Publish" Properties="PublishDir=$(TargetDir)Plugins\%(_Plugin.Filename)\" />
+  </Target>
 </Project>

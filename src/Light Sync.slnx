@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="LightSync.API/LightSync.API.csproj" Id="5d616c14-3673-4558-b60b-47bcb35992eb" />
+  <Project Path="LightSync.Core/LightSync.Core.csproj" />
+  <Project Path="LightSync.HomeAssistant/LightSync.HomeAssistant.csproj" Id="73f25402-62d3-4b2e-b9c2-b2574615d82b" />
+  <Project Path="LightSync.Tests/LightSync.Tests.csproj" />
+  <Project Path="LightSync.UI/LightSync.UI.csproj" />
+</Solution>

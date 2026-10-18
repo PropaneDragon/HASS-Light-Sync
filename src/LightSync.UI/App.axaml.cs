@@ -1,18 +1,22 @@
+using Autofac;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using LightSync.Core.Paths;
+using LightSync.Core.Plugins;
+using LightSync.UI.Navigation;
+using LightSync.UI.Plugins;
 using LightSync.UI.ViewModels;
+using LightSync.UI.ViewModels.Pages;
 using LightSync.UI.Views;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
 
 namespace LightSync.UI
 {
     public partial class App : Application
     {
+        private IContainer? _container;
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -20,34 +24,48 @@ namespace LightSync.UI
 
         public override void OnFrameworkInitializationCompleted()
         {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = new MainWindowViewModel(),
-                };
-            }
-
-            HostApplicationBuilder builder = Host.CreateEmptyApplicationBuilder(new HostApplicationBuilderSettings
-            {
-                DisableDefaults = true,
-                Args = Environment.GetCommandLineArgs(),
-                ApplicationName = base.Name,
-                ContentRootPath = AppContext.BaseDirectory,
-                Configuration = new ConfigurationManager()
-            });
-
             if (!Design.IsDesignMode)
             {
-                ConfigureServices(builder.Services, builder.Configuration, builder.Environment);
+                var builder = new ContainerBuilder();
+
+                ConfigureContainer(builder);
+
+                _container = builder.Build();
+
+                if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    var viewModel = _container.Resolve<IMainWindowViewModel>();
+                    var mainWindow = new MainWindow
+                    {
+                        DataContext = viewModel
+                    };
+
+                    mainWindow.Opened += async (_, _) =>
+                    {
+                        try { await viewModel.OnLoadedAsync(); }
+                        catch { } //Todo
+                    };
+
+                    desktop.MainWindow = mainWindow;
+                    desktop.Exit += (_, _) => _container.Dispose();
+                }
             }
 
             base.OnFrameworkInitializationCompleted();
         }
 
-        private void ConfigureServices(IServiceCollection services, ConfigurationManager configuration, IHostEnvironment environment)
+        private static void ConfigureContainer(ContainerBuilder builder)
         {
+            builder.RegisterType<Navigator>().As<INavigator>().SingleInstance();
+            builder.RegisterType<PluginManager>().As<IPluginManager>().SingleInstance();
+            builder.RegisterType<CommonPaths>().As<ICommonPaths>().SingleInstance();
+            builder.RegisterType<PluginLoader>().As<IPluginLoader>().SingleInstance();
+            builder.RegisterType<PluginManifestLoader>().As<IPluginManifestLoader>().SingleInstance();
 
+            builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>();
+
+            builder.RegisterType<HomePageViewModel>().As<IHomePageViewModel>();
+            builder.RegisterType<AreaConfigurationViewModel>().As<IAreaConfigurationViewModel>();
         }
     }
 }

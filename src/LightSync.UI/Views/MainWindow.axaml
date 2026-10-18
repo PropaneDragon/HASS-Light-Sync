@@ -7,10 +7,12 @@
         x:Class="LightSync.UI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Home Assistant light sync">
+        Title="Light sync">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
+
+    <ContentControl Content="{Binding Navigator.CurrentViewModel}" />
 
 </Window>

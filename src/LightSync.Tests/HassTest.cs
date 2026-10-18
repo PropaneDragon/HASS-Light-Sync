@@ -1,8 +1,12 @@
-﻿namespace LightSync.Tests
+﻿using LightSync.HomeAssistant;
+
+namespace LightSync.Tests
 {
     [TestClass]
-    public sealed class Test1
+    public sealed class HassTest
     {
+        public TestContext TestContext { get; set; }
+
         [AssemblyInitialize]
         public static void AssemblyInit(TestContext context)
         {
@@ -40,9 +44,13 @@
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public async Task TestMethod1()
         {
-            Assert.Fail();
+            var plugin = new HomeAssistantPlugin();
+
+            Assert.IsTrue(await plugin.InitialiseAsync(TestContext.CancellationToken));
+
+            var lights = await plugin.LightInfoSource.GetAvailableLightsAsync();
         }
     }
 }

@@ -14,4 +14,8 @@
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LightSync.API\LightSync.API.csproj" />
+  </ItemGroup>
+
 </Project>
