@@ -20,7 +20,7 @@ namespace LightSync.HomeAssistant
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var address = new Uri("http://hass.proxmox.lan:8123/lovelace/0");
+            var address = new Uri("");
             var accessToken = "";
 
             if (_loopCancellationToken != null)
