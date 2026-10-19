@@ -1,8 +1,33 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:lights="using:LightSync.UI.ViewModels.Lights"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:LightSync.UI.ViewModels.Pages"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="LightSync.UI.Views.Pages.AreaConfigurationView">
-  Welcome to Avalonia!
+             x:Class="LightSync.UI.Views.Pages.AreaConfigurationView"
+             x:DataType="vm:AreaConfigurationViewModel">
+
+    <Design.DataContext>
+        <vm:AreaConfigurationViewModel/>
+    </Design.DataContext>
+
+  <StackPanel Margin="8">
+      <ComboBox
+        SelectedItem="{Binding SelectedLight}"
+        ItemsSource="{Binding AvailableLights}">
+        <ComboBox.ItemTemplate>
+            <DataTemplate DataType="lights:LightInfoViewModel">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
+                    <Rectangle Width="16" VerticalAlignment="Stretch">
+                        <Rectangle.Fill>
+                            <SolidColorBrush Color="{Binding Colour}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock Grid.Column="1" Text="{Binding Name}" />
+                </Grid>
+            </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+  </StackPanel>
 </UserControl>

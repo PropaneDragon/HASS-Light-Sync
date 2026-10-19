@@ -17,9 +17,11 @@ namespace LightSync.HomeAssistant
 
         public async Task InitialiseAsync(CancellationToken cancellationToken = default)
         {
+            if (!_connectionManager.IsConnected)
+                await _connectionManager.ConnectAsync(cancellationToken);
         }
 
-        public async Task<List<ILightInfo>> GetAvailableLightsAsync(CancellationToken cancellationToken = default)
+        public async Task<IReadOnlyList<ILightInfo>> GetAvailableLightsAsync(CancellationToken cancellationToken = default)
         {
             var statesCommand = new GetStatesHomeAssistantCommand();
             var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(30));
@@ -41,9 +43,9 @@ namespace LightSync.HomeAssistant
                 .Select(lightInfo => lightInfo!)];
         }
 
-        public ValueTask DisposeAsync()
+        public async ValueTask DisposeAsync()
         {
-            throw new NotImplementedException();
+            await _connectionManager.DisposeAsync();
         }
 
         private bool IsValidLightElement(JsonElement element)
@@ -61,10 +63,13 @@ namespace LightSync.HomeAssistant
 
         private ILightInfo? ConvertToLightInfo(JsonElement element)
         {
-            if (!element.TryGetProperty("entity_id", out var entityIdElement) || !element.TryGetProperty("attributes", out var attributesElement))
+            if (!element.TryGetProperty("entity_id", out var entityIdElement) 
+                || !element.TryGetProperty("state", out var stateElement)
+                || !element.TryGetProperty("attributes", out var attributesElement))
                 return null;
 
             var entityId = entityIdElement.GetString();
+            var state = stateElement.GetString();
 
             if (string.IsNullOrWhiteSpace(entityId))
                 return null;
@@ -77,17 +82,31 @@ namespace LightSync.HomeAssistant
             if (string.IsNullOrWhiteSpace(friendlyName))
                 return null;
 
-            if (rgbColourElement.ValueKind != JsonValueKind.Array)
+
+            if (!attributesElement.TryGetProperty("supported_color_modes", out var supportedColourModes))
                 return null;
 
-            var rgbArray = rgbColourElement.EnumerateArray().ToImmutableArray();
+            if (supportedColourModes.ValueKind != JsonValueKind.Array)
+                return null;
 
-            var r = rgbArray[0].GetInt32();
-            var g = rgbArray[1].GetInt32();
-            var b = rgbArray[2].GetInt32();
-            var colour = Color.FromArgb(r, g, b);
+            if (!supportedColourModes.EnumerateArray().ToImmutableArray().Any(colourModeElement => colourModeElement.GetString() == "xy" || colourModeElement.GetString() == "hs"))
+                return null;
 
-            return new HomeAssistantLightInfo(_connectionManager, friendlyName, entityId, colour);
+            int brightness = attributesElement.TryGetProperty("brightness", out var brightnessElement) && brightnessElement.ValueKind == JsonValueKind.Number ? brightnessElement.GetInt32() : 0;
+            var colour = Color.FromArgb(brightness, Color.Black);
+
+            if (rgbColourElement.ValueKind == JsonValueKind.Array)
+            {
+                var rgbArray = rgbColourElement.EnumerateArray().ToImmutableArray();
+
+                var r = rgbArray[0].GetInt32();
+                var g = rgbArray[1].GetInt32();
+                var b = rgbArray[2].GetInt32();
+
+                colour = Color.FromArgb(brightness, r, g, b);
+            }
+
+            return new HomeAssistantLightInfo(_connectionManager, friendlyName, entityId, state == "on", colour);
         }
     }
 }

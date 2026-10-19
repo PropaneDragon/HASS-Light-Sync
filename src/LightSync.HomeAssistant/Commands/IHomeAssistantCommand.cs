@@ -5,6 +5,7 @@ namespace LightSync.HomeAssistant.Commands
 {
     internal enum HomeAssistantCommandType
     {
+        NoResposne,
         OneShot,
         Continuous
     }

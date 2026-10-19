@@ -3,14 +3,14 @@ using System.Collections.Concurrent;
 
 namespace LightSync.HomeAssistant
 {
-    internal class ConnectionManager : IAsyncDisposable
+    internal class ConnectionManager : IConnectionManager, IAsyncDisposable
     {
         private readonly ConcurrentDictionary<uint, IHomeAssistantCommand> _commandQueue = [];
 
         private ConnectionClient? _connectionClient = null;
         private CancellationTokenSource? _loopCancellationToken;
 
-        public ConnectionClient? ConnectionClient => _connectionClient;
+        public bool IsConnected => _connectionClient?.State == ConnectionClient.ConnectionState.Connected;
 
         public ConnectionManager()
         {
@@ -46,6 +46,45 @@ namespace LightSync.HomeAssistant
             return true;
         }
 
+        public async Task AddCommandAsync(IHomeAssistantCommand command, CancellationToken cancellationToken = default)
+        {
+            if (_connectionClient != null)
+            {
+                var id = _connectionClient.GetNextCommandId();
+                var request = await Task.Run(() => command.GetMessage(id), cancellationToken);
+
+                if (command.CommandType != HomeAssistantCommandType.NoResposne)
+                _commandQueue[id] = command;
+
+                await _connectionClient.SendMessageAsync(request, cancellationToken);
+            }
+        }
+
+        public bool RemoveCommand(IHomeAssistantCommand command)
+        {
+            var foundPair = _commandQueue.FirstOrDefault(kv => kv.Value == command);
+            return _commandQueue.TryRemove(foundPair);
+        }
+
+        public bool RemoveCommand(uint commandId)
+        {
+            return _commandQueue.TryRemove(commandId, out _);
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            if (_loopCancellationToken != null)
+            {
+                await _loopCancellationToken.CancelAsync();
+                _loopCancellationToken.Dispose();
+            }
+
+            if (_connectionClient != null)
+            {
+                await _connectionClient.DisposeAsync();
+            }
+        }
+
         private async Task RunCommandLoop(CancellationToken cancellationToken = default)
         {
             while (!cancellationToken.IsCancellationRequested && _connectionClient != null && _connectionClient.State == ConnectionClient.ConnectionState.Connected)
@@ -63,33 +102,6 @@ namespace LightSync.HomeAssistant
 
                 if (command.CommandType == HomeAssistantCommandType.OneShot)
                     _commandQueue.TryRemove(id, out _);
-            }
-        }
-
-        public async Task AddCommandAsync(IHomeAssistantCommand command, CancellationToken cancellationToken = default)
-        {
-            if (_connectionClient != null)
-            {
-                var id = _connectionClient.GetNextCommandId();
-                var request = await Task.Run(() => command.GetMessage(id), cancellationToken);
-
-                _commandQueue[id] = command;
-
-                await _connectionClient.SendMessageAsync(request, cancellationToken);
-            }
-        }
-
-        public async ValueTask DisposeAsync()
-        {
-            if (_loopCancellationToken != null)
-            {
-                await _loopCancellationToken.CancelAsync();
-                _loopCancellationToken.Dispose();
-            }
-
-            if (_connectionClient != null)
-            {
-                await _connectionClient.DisposeAsync();
             }
         }
     }

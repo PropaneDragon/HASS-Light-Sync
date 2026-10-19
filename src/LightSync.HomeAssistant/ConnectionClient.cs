@@ -4,7 +4,7 @@ using System.Text.Json.Nodes;
 
 namespace LightSync.HomeAssistant
 {
-    public class ConnectionClient : IAsyncDisposable
+    public class ConnectionClient : IConnectionClient, IAsyncDisposable
     {
         private readonly string _accessToken;
         private readonly Uri _socketUri;
