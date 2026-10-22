@@ -1,0 +1,12 @@
+<!-- <Border Classes="chip"><TextBlock Text="Syncing"/></Border> -->
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="Border.chip">
+        <Setter Property="Background" Value="{DynamicResource SurfaceRaisedBrush}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource CornerRadiusPill}"/>
+        <Setter Property="Padding" Value="{DynamicResource ChipPadding}"/>
+    </Style>
+    <Style Selector="Border.chip > TextBlock">
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeCaption}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+    </Style>
+</Styles>

@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace LightSync.UI.Views.Pages;
 
-public partial class HomePageView : UserControl
+public partial class SourcesPageView : UserControl
 {
-    public HomePageView()
+    public SourcesPageView()
     {
         InitializeComponent();
     }

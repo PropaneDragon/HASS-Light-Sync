@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace LightSync.UI.ViewModels.Pages
 {
-    internal interface IHomePageViewModel : IViewModelBase { }
+    internal interface IAreasPageViewModel : IPageViewModelBase { }
 
-    internal partial class HomePageViewModel : ViewModelBase, IHomePageViewModel
+    internal partial class AreasPageViewModel : PageViewModelBase, IAreasPageViewModel
     {
         private readonly INavigator _navigator;
         private readonly IPluginManager _pluginManager;
@@ -17,7 +17,7 @@ namespace LightSync.UI.ViewModels.Pages
         [ObservableProperty]
         public partial bool IsLoadingPlugins { get; private set; } = true;
 
-        public HomePageViewModel(INavigator navigator, IPluginManager pluginManager)
+        public AreasPageViewModel(INavigator navigator, IPluginManager pluginManager)
         {
             _navigator = navigator;
             _pluginManager = pluginManager;

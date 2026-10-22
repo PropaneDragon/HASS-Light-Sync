@@ -1,0 +1,28 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ControlTheme x:Key="AppProgressBarTheme" TargetType="ProgressBar" BasedOn="{StaticResource {x:Type ProgressBar}}">
+        <Setter Property="Background" Value="{DynamicResource TrackBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource CornerRadiusPill}"/>
+
+        <Style Selector="^:horizontal">
+            <Setter Property="MinHeight" Value="{DynamicResource ProgressBarThickness}"/>
+        </Style>
+        <Style Selector="^:horizontal.small">
+            <Setter Property="MinHeight" Value="{DynamicResource SubProgressBarThickness}"/>
+        </Style>
+
+        <Style Selector="^:vertical">
+            <Setter Property="MinWidth" Value="{DynamicResource ProgressBarThickness}"/>
+        </Style>
+        <Style Selector="^:vertical.small">
+            <Setter Property="MinWidth" Value="{DynamicResource SubProgressBarThickness}"/>
+        </Style>
+
+        <Style Selector="^.success"><Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/></Style>
+        <Style Selector="^.warning"><Setter Property="Foreground" Value="{DynamicResource WarningBrush}"/></Style>
+        <Style Selector="^.danger"><Setter Property="Foreground" Value="{DynamicResource DangerBrush}"/></Style>
+    </ControlTheme>
+
+</ResourceDictionary>

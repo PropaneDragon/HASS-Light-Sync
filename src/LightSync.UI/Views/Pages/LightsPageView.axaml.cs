@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace LightSync.UI.Views.Pages;
 
-public partial class AreaConfigurationView : UserControl
+public partial class LightsPageView : UserControl
 {
-    public AreaConfigurationView()
+    public LightsPageView()
     {
         InitializeComponent();
     }

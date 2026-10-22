@@ -5,8 +5,11 @@ namespace LightSync.HomeAssistant.Commands
 {
     internal class GetStatesHomeAssistantCommand : IHomeAssistantCommand
     {
+        private readonly TaskCompletionSource _statesReceivedCompletionSource = new(TaskCreationOptions.RunContinuationsAsynchronously);
+
         public bool StatesReceived { get; private set; } = false;
         public List<JsonElement> StateElements { get; } = [];
+        public Task StatesReceivedTask => _statesReceivedCompletionSource.Task;
         public HomeAssistantCommandType CommandType => HomeAssistantCommandType.OneShot;
 
         public JsonNode GetMessage(uint messageId)
@@ -33,6 +36,7 @@ namespace LightSync.HomeAssistant.Commands
             StateElements.AddRange([.. resultElement.EnumerateArray()]);
 
             StatesReceived = true;
+            _statesReceivedCompletionSource.TrySetResult();
         }
     }
 }

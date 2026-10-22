@@ -1,0 +1,13 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="Button"><Setter Property="Theme" Value="{DynamicResource AppButtonTheme}"/></Style>
+    <Style Selector="TextBox"><Setter Property="Theme" Value="{DynamicResource AppTextBoxTheme}"/></Style>
+    <Style Selector="ComboBox"><Setter Property="Theme" Value="{DynamicResource AppComboBoxTheme}"/></Style>
+    <Style Selector="CheckBox"><Setter Property="Theme" Value="{DynamicResource AppCheckBoxTheme}"/></Style>
+    <Style Selector="ProgressBar"><Setter Property="Theme" Value="{DynamicResource AppProgressBarTheme}"/></Style>
+    <Style Selector="ListBoxItem"><Setter Property="Theme" Value="{DynamicResource AppListBoxItemTheme}"/></Style>
+    <Style Selector="ListBox">
+        <Setter Property="ItemsPanel">
+            <ItemsPanelTemplate><StackPanel Spacing="{DynamicResource SpacingS}"/></ItemsPanelTemplate>
+        </Setter>
+    </Style>
+</Styles>

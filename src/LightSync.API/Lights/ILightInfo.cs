@@ -12,7 +12,9 @@ namespace LightSync.API.Lights
         Color Colour { get; }
 
         Task SetOnAsync(bool on, CancellationToken cancellationToken = default);
-        Task SetColourAsync(Color colour, CancellationToken cancellation = default);
+        Task SetOnAsync(bool on, TimeSpan transitionTime, CancellationToken cancellationToken = default);
+        Task SetColourAsync(Color colour, CancellationToken cancellationToken = default);
+        Task SetColourAsync(Color colour, TimeSpan transitionTime, CancellationToken cancellationToken = default);
 
         event EventHandler<OnChangedEventArgs> OnChanged;
         event EventHandler<NameChangedEventArgs> NameChanged;

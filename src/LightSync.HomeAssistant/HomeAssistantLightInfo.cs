@@ -4,40 +4,26 @@ using System.Drawing;
 
 namespace LightSync.HomeAssistant
 {
-    internal struct HomeAssistantLightInfo : ILightInfo
+    internal class HomeAssistantLightInfo : LightInfo
     {
         private readonly ConnectionManager _connectionManager;
 
-        public bool IsOn { get; }
-
-        public string Name { get; }
-
-        public string Identifier { get; }
-
-        public Color Colour { get; private set; }
-
-        public event EventHandler<OnChangedEventArgs>? OnChanged;
-        public event EventHandler<NameChangedEventArgs>? NameChanged;
-        public event EventHandler<ColourChangedEventArgs>? ColourChanged;
-
-        public HomeAssistantLightInfo(ConnectionManager connectionManager, string name, string identifier, bool isOn = false, Color color = default)
+        public HomeAssistantLightInfo(ConnectionManager connectionManager, string name, string identifier, bool isOn = false, Color color = default) : base(name, identifier)
         {
             _connectionManager = connectionManager;
 
-            Name = name;
-            Identifier = identifier;
             IsOn = isOn;
             Colour = color;
         }
 
-        public async readonly Task SetOnAsync(bool on, CancellationToken cancellationToken = default)
+        public override async Task SetOnAsync(bool on, TimeSpan transitionTime = default, CancellationToken cancellationToken = default)
         {
-            await _connectionManager.AddCommandAsync(new SetLightStateCommand(on, Identifier));
+            await _connectionManager.AddCommandAsync(new SetLightStateCommand(on, Identifier, transitionTime));
         }
 
-        public async readonly Task SetColourAsync(Color colour, CancellationToken cancellationToken = default)
+        public override async Task SetColourAsync(Color colour, TimeSpan transitionTime = default, CancellationToken cancellationToken = default)
         {
-            await _connectionManager.AddCommandAsync(new SetLightStateCommand(colour, Identifier));
+            await _connectionManager.AddCommandAsync(new SetLightStateCommand(colour, Identifier, transitionTime));
         }
     }
 }

@@ -17,7 +17,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
@@ -34,6 +33,8 @@
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.13" />
+    <PackageReference Include="Optris.Icons.Avalonia" Version="12.0.7" />
+    <PackageReference Include="Optris.Icons.Avalonia.FontAwesome7" Version="12.0.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,9 +44,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Pages\HomePageView.axaml.cs">
-      <DependentUpon>HomePageView.axaml</DependentUpon>
+    <Compile Update="Views\Pages\AreasPageView.axaml.cs">
+      <DependentUpon>AreasPageView.axaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Dialogs\" />
   </ItemGroup>
 
   <Target Name="BundlePlugins" AfterTargets="Build" Condition="'$(DesignTimeBuild)' != 'true'">

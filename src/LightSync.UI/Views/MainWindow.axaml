@@ -1,18 +1,139 @@
 <Window xmlns="https://github.com/avaloniaui"
+        xmlns:converters="using:LightSync.UI.Converters"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:LightSync.UI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:emit="using:System.Reflection.Emit"
+        xmlns:i="https://github.com/projektanker/icons.avalonia"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:metadata="using:System.Reflection.Metadata"
+        xmlns:progress="using:LightSync.UI.ViewModels.Progress"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="LightSync.UI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="Light sync">
 
-    <Design.DataContext>
+    <!--<Design.DataContext>
         <vm:MainWindowViewModel/>
-    </Design.DataContext>
+    </Design.DataContext>-->
 
-    <ContentControl Content="{Binding Navigator.CurrentViewModel}" />
+    <Window.Resources>
+        <converters:BoolToValueConverter
+            x:Key="BoolToOpacityConverter"
+            TrueValue="1"
+            FalseValue="0" />
+    </Window.Resources>
 
+    <Grid>
+
+        <Border>
+            <Grid ColumnDefinitions="200,*">
+                <Grid Grid.Column="0" RowDefinitions="*,Auto">
+                    <Border Grid.Row="0" BorderBrush="{DynamicResource OutlineBrush}" BorderThickness="0,0,1,0">
+                        <StackPanel Spacing="{DynamicResource SpacingS}">
+                            <Border Padding="{DynamicResource HeaderPadding}">
+                                <TextBlock Text="Light Sync" />
+                            </Border>
+                            <ListBox
+                                Classes="nav"
+                                Margin="{DynamicResource NavPadding}"
+                                SelectedItem="{Binding CurrentPage}"
+                                ItemsSource="{Binding Pages}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="vm:MainWindowPage">                                    
+                                        <StackPanel Orientation="Horizontal" Spacing="{DynamicResource SpacingS}">
+                                            <i:Icon Value="{Binding Icon}" />
+                                            <TextBlock Text="{Binding Title}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            
+                <ContentControl Grid.Column="1" Content="{Binding Navigator.CurrentViewModel}" />
+            </Grid>
+        </Border>
+
+        <Grid
+            IsHitTestVisible="{Binding DialogService.IsOpen}"
+            Opacity="{Binding DialogService.IsOpen, Converter={StaticResource BoolToOpacityConverter}}">
+            <Grid.Transitions>
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.2"/>
+                </Transitions>
+            </Grid.Transitions>
+            <Border Background="{DynamicResource ScrimBrush}" />
+            <Border
+                Classes="card"
+                Margin=""
+                MaxWidth="{DynamicResource DialogMaxWidth}"
+                Padding="{DynamicResource DialogPadding}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <ContentControl Content="{Binding DialogService.CurrentViewModel}"/>
+            </Border>
+        </Grid>
+
+        <Grid
+            IsHitTestVisible="{Binding !!ProgressService.ItemsInProgress.Count}"
+            Opacity="{Binding !!ProgressService.ItemsInProgress.Count, Converter={StaticResource BoolToOpacityConverter}}">
+            <Grid.Transitions>
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.2"/>
+                </Transitions>
+            </Grid.Transitions>
+            <Border Background="{DynamicResource ScrimBrush}" />
+            <Border
+                Classes="card"
+                Width="{DynamicResource DialogMaxWidth}"
+                Padding="{DynamicResource DialogPadding}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <StackPanel Spacing="{DynamicResource SpacingXL}">
+                    <TextBlock Classes="title" Text="{Binding ProgressService.Title}"/>
+                    <StackPanel Spacing="{DynamicResource SpacingS}">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock Grid.Column="0" Classes="label" Text="Overall" />
+                            <TextBlock
+                                Grid.Column="1"
+                                IsVisible="{Binding !ProgressService.IsIndeterminate}"
+                                Classes="label"
+                                Text="{Binding ProgressService.OverallProgressPercentage, StringFormat='{}{0:F0}%'}" />
+                        </Grid>
+                        <ProgressBar
+                            IsIndeterminate="{Binding ProgressService.IsIndeterminate}"
+                            Value="{Binding ProgressService.OverallProgressPercentage}" />
+                    </StackPanel>
+                    <ItemsControl 
+                        IsVisible="{Binding ProgressService.HasMultipleProgress}"
+                        ItemsSource="{Binding ProgressService.ItemsInProgress}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Spacing="{DynamicResource SpacingS}" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="progress:ProgressInfoViewModel">
+                                <StackPanel Spacing="{DynamicResource SpacingS}">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <TextBlock Grid.Column="0" Classes="label" Text="{Binding Message}" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            IsVisible="{Binding !IsIndeterminate}"
+                                            Classes="label"
+                                            Text="{Binding ProgressPercentage, StringFormat='{}{0:F0}%'}" />
+                                    </Grid>
+                                    <ProgressBar IsIndeterminate="{Binding IsIndeterminate}" Value="{Binding ProgressPercentage}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+    </Grid>
 </Window>

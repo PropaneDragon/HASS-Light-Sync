@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using LightSync.Core.Lights.Actions;
 using LightSync.UI.Plugins;
 using LightSync.UI.ViewModels.Lights;
 using System;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace LightSync.UI.ViewModels.Pages
 {
-    internal interface IAreaConfigurationViewModel : IViewModelBase { }
+    internal interface IAreaConfigurationViewModel : IPageViewModelBase { }
 
-    internal partial class AreaConfigurationViewModel : ViewModelBase, IAreaConfigurationViewModel, IDisposable
+    internal partial class AreaConfigurationViewModel : PageViewModelBase, IAreaConfigurationViewModel, IDisposable
     {
         private IPluginManager _pluginManager;
 
@@ -40,7 +41,11 @@ namespace LightSync.UI.ViewModels.Pages
 
         partial void OnSelectedLightChanged(LightInfoViewModel? value)
         {
-            _ = value?.AssociatedLightInfo.SetColourAsync(System.Drawing.Color.Aqua);
+            if (value == null)
+                return;
+
+            FlashLightAction flashLightAction = new();
+            _ = flashLightAction.PerformActionAsync(default, value.AssociatedLightInfo);
         }
 
         private async Task UpdateLightsAsync(CancellationToken cancellationToken = default)
@@ -55,7 +60,7 @@ namespace LightSync.UI.ViewModels.Pages
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var availableLights = await Task.Run(async () => await plugin.LightInfoSource.GetAvailableLightsAsync(cancellationToken), cancellationToken);
+                var availableLights = plugin.LightInfoSource.Lights;
 
                 foreach (var light in availableLights)
                 {

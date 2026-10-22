@@ -6,29 +6,31 @@ namespace LightSync.HomeAssistant.Commands
 {
     internal class SetLightStateCommand : IHomeAssistantCommand
     {
+        private readonly string _entityId;
+        private readonly TimeSpan _transitionTime;
+
         private readonly bool? _on;
         private readonly Color? _colour;
 
-        private string _entityId;
-
         public HomeAssistantCommandType CommandType => HomeAssistantCommandType.NoResposne;
 
-        private SetLightStateCommand(string entityId)
+        private SetLightStateCommand(string entityId, TimeSpan transitionTime)
         {
             _entityId = entityId;
+            _transitionTime = transitionTime;
         }
 
-        public SetLightStateCommand(bool on, string entityId) : this(entityId)
+        public SetLightStateCommand(bool on, string entityId, TimeSpan transitionTime = default) : this(entityId, transitionTime)
         {
             _on = on;
         }
 
-        public SetLightStateCommand(Color colour, string entityId) : this(entityId)
+        public SetLightStateCommand(Color colour, string entityId, TimeSpan transitionTime = default) : this(entityId, transitionTime)
         {
             _colour = colour;
         }
 
-        public SetLightStateCommand(bool on, Color colour, string entityId) : this(entityId)
+        public SetLightStateCommand(bool on, Color colour, string entityId, TimeSpan transitionTime = default) : this(entityId, transitionTime)
         {
             _on = on;
             _colour = colour;
@@ -39,12 +41,18 @@ namespace LightSync.HomeAssistant.Commands
             var lightOffCommand = (_on.HasValue && !_on.Value) || (_colour.HasValue && _colour.Value.A <= 0);
             var service = lightOffCommand ? "turn_off" : "turn_on";
 
+            var dataObject = new JsonObject()
+            {
+                ["transition"] = _transitionTime.TotalSeconds
+            };
+
             var messageObject = new JsonObject()
             {
                 ["id"] = messageId,
                 ["type"] = "call_service",
                 ["domain"] = "light",
                 ["service"] = service,
+                ["service_data"] = dataObject,
                 ["target"] = new JsonObject()
                 {
                     ["entity_id"] = _entityId
@@ -53,11 +61,6 @@ namespace LightSync.HomeAssistant.Commands
 
             if (lightOffCommand)
                 return messageObject;
-
-            var dataObject = new JsonObject()
-            {
-                ["transition"] = _on == lightOffCommand ? 1 : 0
-            };
 
             if (_colour.HasValue)
             {
@@ -70,13 +73,12 @@ namespace LightSync.HomeAssistant.Commands
                 };
             }
 
-            messageObject["service_data"] = dataObject;
-
             return messageObject;
         }
 
         public void MessageReceived(JsonElement element)
         {
+            //Unused - Fire only
         }
     }
 }

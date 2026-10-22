@@ -1,0 +1,57 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+            <Color x:Key="SystemAccentColor">#FFB84D</Color>
+            <Color x:Key="SystemAccentColorLight1">#FFC670</Color>
+            <Color x:Key="SystemAccentColorLight2">#FFD494</Color>
+            <Color x:Key="SystemAccentColorLight3">#FFE2B8</Color>
+            <Color x:Key="SystemAccentColorDark1">#E8A13F</Color>
+            <Color x:Key="SystemAccentColorDark2">#D18A2A</Color>
+            <Color x:Key="SystemAccentColorDark3">#B87518</Color>
+
+            <Color x:Key="BackgroundColour">#14161B</Color>
+            <Color x:Key="ScrimColour">#000</Color>
+            <Color x:Key="SurfaceColour">#1C1F26</Color>
+            <Color x:Key="SurfaceRaisedColour">#232732</Color>
+            <Color x:Key="SurfaceHoverColour">#2B303C</Color>
+            <Color x:Key="SurfacePressedColour">#323847</Color>
+            <Color x:Key="InputBackgroundColour">#14161B</Color>
+            <Color x:Key="OutlineColour">#2A2E38</Color>
+            <Color x:Key="OutlineStrongColour">#3A4150</Color>
+            <Color x:Key="TextColour">#E8EAF0</Color>
+            <Color x:Key="TextMutedColour">#9AA1B0</Color>
+            <Color x:Key="TextDisabledColour">#6B7280</Color>
+            <Color x:Key="TextOnAccentColour">#1A1405</Color>
+            <Color x:Key="SuccessColour">#6EE7A8</Color>
+            <Color x:Key="WarningColour">#FFB84D</Color>
+            <Color x:Key="DangerColour">#FF7A70</Color>
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Light">
+            <Color x:Key="SystemAccentColor">#FFB84D</Color>
+            <Color x:Key="SystemAccentColorLight1">#FFC670</Color>
+            <Color x:Key="SystemAccentColorLight2">#FFD494</Color>
+            <Color x:Key="SystemAccentColorLight3">#FFE2B8</Color>
+            <Color x:Key="SystemAccentColorDark1">#E8A13F</Color>
+            <Color x:Key="SystemAccentColorDark2">#D18A2A</Color>
+            <Color x:Key="SystemAccentColorDark3">#B87518</Color>
+
+            <Color x:Key="BackgroundColour">#F4F5F8</Color>
+            <Color x:Key="ScrimColour">#000</Color>
+            <Color x:Key="SurfaceColour">#FFFFFF</Color>
+            <Color x:Key="SurfaceRaisedColour">#EEF0F5</Color>
+            <Color x:Key="SurfaceHoverColour">#E4E7EE</Color>
+            <Color x:Key="SurfacePressedColour">#D8DCE6</Color>
+            <Color x:Key="InputBackgroundColour">#FFFFFF</Color>
+            <Color x:Key="OutlineColour">#DADEE7</Color>
+            <Color x:Key="OutlineStrongColour">#BCC3D1</Color>
+            <Color x:Key="TextColour">#14161B</Color>
+            <Color x:Key="TextMutedColour">#5A6272</Color>
+            <Color x:Key="TextDisabledColour">#8A91A0</Color>
+            <Color x:Key="TextOnAccentColour">#1A1405</Color>
+            <Color x:Key="SuccessColour">#0E7A4B</Color>
+            <Color x:Key="WarningColour">#8A5A00</Color>
+            <Color x:Key="DangerColour">#C0392B</Color>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

@@ -11,5 +11,6 @@
   
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="avares://LightSync.UI/Themes/Theme.axaml"/>
     </Application.Styles>
 </Application>

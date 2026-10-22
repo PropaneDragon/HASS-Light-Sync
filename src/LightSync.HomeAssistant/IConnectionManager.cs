@@ -7,6 +7,7 @@ namespace LightSync.HomeAssistant
         bool IsConnected { get; }
 
         Task<bool> ConnectAsync(CancellationToken cancellationToken = default);
+        Task WaitForConnectionAsync(CancellationToken cancellationToken = default);
         Task AddCommandAsync(IHomeAssistantCommand command, CancellationToken cancellationToken = default);
 
         bool RemoveCommand(IHomeAssistantCommand command);

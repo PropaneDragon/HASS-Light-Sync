@@ -20,8 +20,8 @@ namespace LightSync.HomeAssistant
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var address = new Uri("");
-            var accessToken = "";
+            var address = new Uri("http://hass.proxmox.lan:8123/lovelace/0");
+            var accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI4MjU0NjM0OGFmOGM0NGVjODliNjhhYTc4YTQ4YTUzMCIsImlhdCI6MTc5MjA1OTQyMCwiZXhwIjoyMTA3NDE5NDIwfQ.ax5X3VMZ_zbb4X7JsX2cpiJ7MKmUHfxYtqYVNrNxODo";
 
             if (_loopCancellationToken != null)
                 await _loopCancellationToken.CancelAsync();
@@ -46,6 +46,17 @@ namespace LightSync.HomeAssistant
             return true;
         }
 
+        public async Task WaitForConnectionAsync(CancellationToken cancellationToken = default)
+        {
+            if (_connectionClient == null)
+                throw new InvalidOperationException("There is no connection to wait for.");
+
+            if (IsConnected)
+                return;
+
+            await _connectionClient.ConnectedTask.WaitAsync(cancellationToken);
+        }
+
         public async Task AddCommandAsync(IHomeAssistantCommand command, CancellationToken cancellationToken = default)
         {
             if (_connectionClient != null)
@@ -54,7 +65,7 @@ namespace LightSync.HomeAssistant
                 var request = await Task.Run(() => command.GetMessage(id), cancellationToken);
 
                 if (command.CommandType != HomeAssistantCommandType.NoResposne)
-                _commandQueue[id] = command;
+                    _commandQueue[id] = command;
 
                 await _connectionClient.SendMessageAsync(request, cancellationToken);
             }

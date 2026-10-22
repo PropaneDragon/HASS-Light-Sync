@@ -1,0 +1,22 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{DynamicResource BackgroundColour}"/>
+    <SolidColorBrush x:Key="ScrimBrush" Color="{DynamicResource ScrimColour}" Opacity="0.7"/>
+    <SolidColorBrush x:Key="TrackBrush" Color="{DynamicResource OutlineColour}"/>
+    <SolidColorBrush x:Key="SurfaceBrush" Color="{DynamicResource SurfaceColour}"/>
+    <SolidColorBrush x:Key="SurfaceRaisedBrush" Color="{DynamicResource SurfaceRaisedColour}"/>
+    <SolidColorBrush x:Key="SurfaceHoverBrush" Color="{DynamicResource SurfaceHoverColour}"/>
+    <SolidColorBrush x:Key="SurfacePressedBrush" Color="{DynamicResource SurfacePressedColour}"/>
+    <SolidColorBrush x:Key="InputBackgroundBrush" Color="{DynamicResource InputBackgroundColour}"/>
+    <SolidColorBrush x:Key="OutlineBrush" Color="{DynamicResource OutlineColour}"/>
+    <SolidColorBrush x:Key="OutlineStrongBrush" Color="{DynamicResource OutlineStrongColour}"/>
+    <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource TextColour}"/>
+    <SolidColorBrush x:Key="TextMutedBrush" Color="{DynamicResource TextMutedColour}"/>
+    <SolidColorBrush x:Key="TextDisabledBrush" Color="{DynamicResource TextDisabledColour}"/>
+    <SolidColorBrush x:Key="TextOnAccentBrush" Color="{DynamicResource TextOnAccentColour}"/>
+    <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource SystemAccentColor}"/>
+    <SolidColorBrush x:Key="AccentHoverBrush" Color="{DynamicResource SystemAccentColorLight1}"/>
+    <SolidColorBrush x:Key="AccentPressedBrush" Color="{DynamicResource SystemAccentColorDark1}"/>
+    <SolidColorBrush x:Key="SuccessBrush" Color="{DynamicResource SuccessColour}"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="{DynamicResource WarningColour}"/>
+    <SolidColorBrush x:Key="DangerBrush" Color="{DynamicResource DangerColour}"/>
+</ResourceDictionary>

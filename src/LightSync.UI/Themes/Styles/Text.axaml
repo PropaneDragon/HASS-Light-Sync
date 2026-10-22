@@ -1,0 +1,11 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="TextBlock.heading"><Setter Property="FontSize" Value="{DynamicResource FontSizeHeading}"/><Setter Property="FontWeight" Value="{DynamicResource FontWeightBold}"/></Style>
+    <Style Selector="TextBlock.title"><Setter Property="FontSize" Value="{DynamicResource FontSizeTitle}"/><Setter Property="FontWeight" Value="{DynamicResource FontWeightSemiBold}"/></Style>
+    <Style Selector="TextBlock.subtitle"><Setter Property="FontSize" Value="{DynamicResource FontSizeSubtitle}"/><Setter Property="FontWeight" Value="{DynamicResource FontWeightSemiBold}"/></Style>
+    <Style Selector="TextBlock.caption"><Setter Property="FontSize" Value="{DynamicResource FontSizeCaption}"/></Style>
+    <Style Selector="TextBlock.muted"><Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/></Style>
+    <Style Selector="TextBlock.label"><Setter Property="FontSize" Value="{DynamicResource FontSizeCaption}"/><Setter Property="FontWeight" Value="{DynamicResource FontWeightSemiBold}"/><Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/></Style>
+    <Style Selector="TextBlock.success"><Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/></Style>
+    <Style Selector="TextBlock.warning"><Setter Property="Foreground" Value="{DynamicResource WarningBrush}"/></Style>
+    <Style Selector="TextBlock.danger"><Setter Property="Foreground" Value="{DynamicResource DangerBrush}"/></Style>
+</Styles>

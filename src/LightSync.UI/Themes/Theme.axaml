@@ -1,0 +1,25 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://LightSync.UI/Themes/Colours.axaml"/>
+                <ResourceInclude Source="avares://LightSync.UI/Themes/Brushes.axaml"/>
+                <ResourceInclude Source="avares://LightSync.UI/Themes/Sizes/Typography.axaml"/>
+                <ResourceInclude Source="avares://LightSync.UI/Themes/Sizes/Spacing.axaml"/>
+                <ResourceInclude Source="avares://LightSync.UI/Themes/Sizes/Borders.axaml"/>
+                <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/Button.axaml"/>
+                <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/TextBox.axaml"/>
+                <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/ComboBox.axaml"/>
+                <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/CheckBox.axaml"/>
+                <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/ProgressBar.axaml"/>
+                <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/ListBoxItem.axaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+    <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Base.axaml"/>
+    <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Text.axaml"/>
+    <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Card.axaml"/>
+    <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Chip.axaml"/>
+    <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Navigation.axaml"/>
+    <StyleInclude Source="avares://LightSync.UI/Themes/Controls/Controls.axaml"/>
+</Styles>

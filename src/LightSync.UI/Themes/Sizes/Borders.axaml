@@ -1,0 +1,7 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Thickness x:Key="BorderThicknessDefault">1</Thickness>
+    <CornerRadius x:Key="CornerRadiusSmall">4</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusControl">10</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusCard">14</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusPill">999</CornerRadius>
+</ResourceDictionary>

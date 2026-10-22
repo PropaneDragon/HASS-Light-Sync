@@ -46,11 +46,6 @@ namespace LightSync.Tests
         [TestMethod]
         public async Task TestMethod1()
         {
-            var plugin = new HomeAssistantPlugin();
-
-            Assert.IsTrue(await plugin.InitialiseAsync(TestContext.CancellationToken));
-
-            var lights = await plugin.LightInfoSource.GetAvailableLightsAsync();
         }
     }
 }

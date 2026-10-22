@@ -8,7 +8,23 @@ namespace LightSync.HomeAssistant
 {
     internal class HomeAssistantLightInfoSource : ILightInfoSource
     {
+        private readonly Lock _lightsLock = new();
+        private readonly List<ILightInfo> _lights = [];
         private readonly ConnectionManager _connectionManager;
+        private readonly CancellationTokenSource _lightSyncCancellationToken = new();
+
+        public IReadOnlyList<ILightInfo> Lights
+        {
+            get { lock(_lightsLock) { return [.. _lights]; } }
+            private set
+            {
+                lock (_lightsLock)
+                {
+                    _lights.Clear();
+                    _lights.AddRange(value);
+                }
+            }
+        }
 
         public HomeAssistantLightInfoSource(ConnectionManager connectionManager)
         {
@@ -18,23 +34,28 @@ namespace LightSync.HomeAssistant
         public async Task InitialiseAsync(CancellationToken cancellationToken = default)
         {
             if (!_connectionManager.IsConnected)
-                await _connectionManager.ConnectAsync(cancellationToken);
+                await _connectionManager.ConnectAsync(cancellationToken).ConfigureAwait(false);
+
+            await _connectionManager.WaitForConnectionAsync(cancellationToken).ConfigureAwait(false);
+            await UpdateLightsAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<IReadOnlyList<ILightInfo>> GetAvailableLightsAsync(CancellationToken cancellationToken = default)
+        public async ValueTask DisposeAsync()
+        {
+            await _lightSyncCancellationToken.CancelAsync();
+            _lightSyncCancellationToken.Dispose();
+        }
+
+        private async Task<IReadOnlyList<ILightInfo>> GetAvailableLightsAsync(CancellationToken cancellationToken = default)
         {
             var statesCommand = new GetStatesHomeAssistantCommand();
             var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(30));
 
             await _connectionManager.AddCommandAsync(statesCommand, cancellationToken);
-
-            while (!timeout.IsCancellationRequested && !statesCommand.StatesReceived)
-            {
-                await Task.Delay(TimeSpan.FromMilliseconds(500), cancellationToken);
-            }
+            await statesCommand.StatesReceivedTask.WaitAsync(cancellationToken);
 
             if (timeout.IsCancellationRequested)
-                return [];
+                throw new TimeoutException("Timed out whilst waiting for available lights.");
 
             return [.. statesCommand.StateElements
                 .Where(IsValidLightElement)
@@ -43,9 +64,9 @@ namespace LightSync.HomeAssistant
                 .Select(lightInfo => lightInfo!)];
         }
 
-        public async ValueTask DisposeAsync()
+        private async Task UpdateLightsAsync(CancellationToken cancellationToken = default)
         {
-            await _connectionManager.DisposeAsync();
+            Lights = await GetAvailableLightsAsync(cancellationToken).ConfigureAwait(false);
         }
 
         private bool IsValidLightElement(JsonElement element)
@@ -81,7 +102,6 @@ namespace LightSync.HomeAssistant
 
             if (string.IsNullOrWhiteSpace(friendlyName))
                 return null;
-
 
             if (!attributesElement.TryGetProperty("supported_color_modes", out var supportedColourModes))
                 return null;

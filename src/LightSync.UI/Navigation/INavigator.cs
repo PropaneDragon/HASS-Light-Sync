@@ -1,13 +1,15 @@
-﻿using LightSync.UI.ViewModels;
+﻿using LightSync.UI.ViewModels.Pages;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace LightSync.UI.Navigation
 {
-    public interface INavigator
+    internal interface INavigator
     {
-        IViewModelBase? CurrentViewModel { get; }
+        IPageViewModelBase? CurrentViewModel { get; }
 
-        Task NavigateToAsync<TViewModel>(CancellationToken cancellationToken = default) where TViewModel : IViewModelBase;
+        Task NavigateToAsync(Type viewModelType, CancellationToken cancellationToken = default);
+        Task NavigateToAsync<TViewModel>(CancellationToken cancellationToken = default) where TViewModel : IPageViewModelBase;
     }
 }

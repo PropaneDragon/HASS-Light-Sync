@@ -12,8 +12,10 @@ namespace LightSync.HomeAssistant
 
         private uint _commandId = 0;
         private ClientWebSocket? _webSocket;
+        private TaskCompletionSource _connectedCompletion = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
         public ConnectionState State { get; private set; } = ConnectionState.Disconnected;
+        public Task ConnectedTask => _connectedCompletion.Task;
 
         public enum ConnectionState
         {
@@ -21,6 +23,8 @@ namespace LightSync.HomeAssistant
             Authenticating,
             Connected
         }
+
+        public event EventHandler<EventArgs>? Connected;
 
         public ConnectionClient(Uri homeAssistantAddress, string accessToken)
         {
@@ -33,6 +37,8 @@ namespace LightSync.HomeAssistant
 
         public async Task TryConnectAsync(CancellationToken cancellationToken = default)
         {
+            _connectedCompletion = new(TaskCreationOptions.RunContinuationsAsynchronously);
+
             cancellationToken.ThrowIfCancellationRequested();
 
             if (_webSocket?.State == WebSocketState.Open)
@@ -55,6 +61,9 @@ namespace LightSync.HomeAssistant
 
             await _webSocket.ConnectAsync(_socketUri, cancellationToken).ConfigureAwait(false);
             await PerformHandshakeAsync(cancellationToken);
+
+            Connected?.Invoke(this, new());
+            _connectedCompletion.TrySetResult();
         }
 
         public async Task SendMessageAsync(JsonNode node, CancellationToken cancellationToken = default)
