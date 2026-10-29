@@ -1,0 +1,68 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <DropDownButton Theme="{DynamicResource AppDropDownButtonTheme}" Content="Filter">
+                            <DropDownButton.Flyout><Flyout><TextBlock Text="Flyout content"/></Flyout></DropDownButton.Flyout>
+                        </DropDownButton>
+                        <DropDownButton Theme="{DynamicResource AppDropDownButtonTheme}" Classes="active" Content="Filter (active)"/>
+                        <DropDownButton Theme="{DynamicResource AppDropDownButtonTheme}" Classes="accent" Content="Accent"/>
+                        <DropDownButton Theme="{DynamicResource AppDropDownButtonTheme}" IsEnabled="False" Content="Disabled"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <DropDownButton Theme="{DynamicResource AppDropDownButtonTheme}" Content="Filter">
+                            <DropDownButton.Flyout><Flyout><TextBlock Text="Flyout content"/></Flyout></DropDownButton.Flyout>
+                        </DropDownButton>
+                        <DropDownButton Theme="{DynamicResource AppDropDownButtonTheme}" Classes="active" Content="Filter (active)"/>
+                        <DropDownButton Theme="{DynamicResource AppDropDownButtonTheme}" Classes="accent" Content="Accent"/>
+                        <DropDownButton Theme="{DynamicResource AppDropDownButtonTheme}" IsEnabled="False" Content="Disabled"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="AppDropDownButtonTheme" TargetType="DropDownButton" BasedOn="{StaticResource AppButtonTheme}">
+        <Setter Property="Padding" Value="{DynamicResource DropDownPadding}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Background="{TemplateBinding Background}"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      CornerRadius="{TemplateBinding CornerRadius}"
+                                      Padding="{TemplateBinding Padding}"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    <Path Name="Chevron" IsHitTestVisible="False"
+                          HorizontalAlignment="Right" VerticalAlignment="Center"
+                          Margin="{DynamicResource DropDownChevronMargin}"
+                          Data="M1,1 L5,5 L9,1" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"
+                          Stroke="{Binding #PART_ContentPresenter.Foreground}"
+                          RenderTransformOrigin="50%,50%">
+                        <Path.Transitions>
+                            <Transitions><TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15"/></Transitions>
+                        </Path.Transitions>
+                    </Path>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:flyout-open /template/ Path#Chevron">
+            <Setter Property="RenderTransform" Value="rotate(180deg)"/>
+        </Style>
+
+        <Style Selector="^.active"><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/></Style>
+    </ControlTheme>
+</ResourceDictionary>

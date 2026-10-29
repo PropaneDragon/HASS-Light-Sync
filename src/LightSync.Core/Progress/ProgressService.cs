@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-
-namespace LightSync.UI.Progress
+﻿namespace LightSync.Core.Progress
 {
-    internal class ProgressService : IProgressService
+    public class ProgressService : IProgressService
     {
         private static readonly Lock _itemsInProgressLock = new();
         private static readonly List<IProgressInfo> _itemsInProgress = [];

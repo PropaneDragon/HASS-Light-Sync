@@ -1,0 +1,47 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <ToggleButton Theme="{DynamicResource ChipToggleButtonTheme}" Content="Unchecked"/>
+                        <ToggleButton Theme="{DynamicResource ChipToggleButtonTheme}" IsChecked="True" Content="Checked"/>
+                        <ToggleButton Theme="{DynamicResource ChipToggleButtonTheme}" IsEnabled="False" Content="Disabled"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <ToggleButton Theme="{DynamicResource ChipToggleButtonTheme}" Content="Unchecked"/>
+                        <ToggleButton Theme="{DynamicResource ChipToggleButtonTheme}" IsChecked="True" Content="Checked"/>
+                        <ToggleButton Theme="{DynamicResource ChipToggleButtonTheme}" IsEnabled="False" Content="Disabled"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
+  <ControlTheme x:Key="ChipToggleButtonTheme" TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+    <Setter Property="Background" Value="{DynamicResource SurfaceRaisedBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource OutlineStrongBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource BorderThicknessDefault}"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource CornerRadiusPill}"/>
+    <Setter Property="MinHeight" Value="{DynamicResource ControlMinHeight}"/>
+    <Setter Property="Padding" Value="{DynamicResource InputPadding}"/>
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeBody}"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource SurfaceHoverBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource OutlineStrongBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+    </Style>
+    <Style Selector="^:checked /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentSubtleBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

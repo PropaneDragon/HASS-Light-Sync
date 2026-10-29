@@ -2,6 +2,7 @@
 using LightSync.Core.Paths;
 using LightSync.Core.Plugins;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace LightSync.UI.Plugins
     internal interface IPluginManager
     {
         IReadOnlyList<IPlugin> Plugins { get; }
+        IReadOnlyList<ILightPlugin> LightPluugins { get; }
+        IReadOnlyList<ICapturePlugin> CapturePlugins { get; }
 
         Task LoadPluginsAsync(CancellationToken cancellationToken = default);
     }
@@ -24,6 +27,8 @@ namespace LightSync.UI.Plugins
         private readonly ICommonPaths _commonPaths;
 
         public IReadOnlyList<IPlugin> Plugins { get { lock (_pluginsLock) return [.. _plugins]; } }
+        public IReadOnlyList<ILightPlugin> LightPluugins => [.. Plugins.OfType<ILightPlugin>()];
+        public IReadOnlyList<ICapturePlugin> CapturePlugins => [.. Plugins.OfType<ICapturePlugin>()];
 
         public PluginManager(IPluginLoader pluginLoader, IPluginManifestLoader pluginManifestLoader, ICommonPaths commonPaths)
         {

@@ -1,4 +1,31 @@
-<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="https://github.com/projektanker/icons.avalonia">
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Classes="heading" Text="heading"/><TextBlock Classes="title" Text="title"/><TextBlock Classes="subtitle" Text="subtitle"/>
+                        <TextBlock Text="default body text"/><TextBlock Classes="caption" Text="caption"/><TextBlock Classes="muted" Text="muted"/>
+                        <TextBlock Classes="label" Text="LABEL"/><TextBlock Classes="accent" Text="accent"/><TextBlock Classes="success" Text="success"/>
+                        <TextBlock Classes="warning" Text="warning"/><TextBlock Classes="danger" Text="danger"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Classes="heading" Text="heading"/><TextBlock Classes="title" Text="title"/><TextBlock Classes="subtitle" Text="subtitle"/>
+                        <TextBlock Text="default body text"/><TextBlock Classes="caption" Text="caption"/><TextBlock Classes="muted" Text="muted"/>
+                        <TextBlock Classes="label" Text="LABEL"/><TextBlock Classes="accent" Text="accent"/><TextBlock Classes="success" Text="success"/>
+                        <TextBlock Classes="warning" Text="warning"/><TextBlock Classes="danger" Text="danger"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
     <Style Selector="TextBlock.heading"><Setter Property="FontSize" Value="{DynamicResource FontSizeHeading}"/><Setter Property="FontWeight" Value="{DynamicResource FontWeightBold}"/></Style>
     <Style Selector="TextBlock.title"><Setter Property="FontSize" Value="{DynamicResource FontSizeTitle}"/><Setter Property="FontWeight" Value="{DynamicResource FontWeightSemiBold}"/></Style>
     <Style Selector="TextBlock.subtitle"><Setter Property="FontSize" Value="{DynamicResource FontSizeSubtitle}"/><Setter Property="FontWeight" Value="{DynamicResource FontWeightSemiBold}"/></Style>
@@ -8,4 +35,5 @@
     <Style Selector="TextBlock.success"><Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/></Style>
     <Style Selector="TextBlock.warning"><Setter Property="Foreground" Value="{DynamicResource WarningBrush}"/></Style>
     <Style Selector="TextBlock.danger"><Setter Property="Foreground" Value="{DynamicResource DangerBrush}"/></Style>
+    <Style Selector="TextBlock.accent"><Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/></Style>
 </Styles>

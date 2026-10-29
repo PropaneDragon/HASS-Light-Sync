@@ -1,4 +1,31 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="14" Width="260">
+                        <ProgressBar Theme="{DynamicResource AppProgressBarTheme}" Value="60"/>
+                        <ProgressBar Theme="{DynamicResource AppProgressBarTheme}" Classes="success" Value="80"/>
+                        <ProgressBar Theme="{DynamicResource AppProgressBarTheme}" Classes="warning" Value="45"/>
+                        <ProgressBar Theme="{DynamicResource AppProgressBarTheme}" Classes="danger" Value="20"/>
+                        <ProgressBar Theme="{DynamicResource AppProgressBarTheme}" IsIndeterminate="True"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="14" Width="260">
+                        <ProgressBar Theme="{DynamicResource AppProgressBarTheme}" Value="60"/>
+                        <ProgressBar Theme="{DynamicResource AppProgressBarTheme}" Classes="success" Value="80"/>
+                        <ProgressBar Theme="{DynamicResource AppProgressBarTheme}" Classes="warning" Value="45"/>
+                        <ProgressBar Theme="{DynamicResource AppProgressBarTheme}" Classes="danger" Value="20"/>
+                        <ProgressBar Theme="{DynamicResource AppProgressBarTheme}" IsIndeterminate="True"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
     
     <ControlTheme x:Key="AppProgressBarTheme" TargetType="ProgressBar" BasedOn="{StaticResource {x:Type ProgressBar}}">
         <Setter Property="Background" Value="{DynamicResource TrackBrush}"/>

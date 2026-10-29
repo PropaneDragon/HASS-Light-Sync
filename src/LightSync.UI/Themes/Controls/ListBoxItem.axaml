@@ -1,5 +1,46 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Orientation="Horizontal" Spacing="20">
+                        <StackPanel Spacing="4"><TextBlock Classes="label" Text="DEFAULT"/>
+                            <ListBox SelectedIndex="1" Width="200">
+                                <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">First</ListBoxItem>
+                                <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Second (selected)</ListBoxItem>
+                                <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Third</ListBoxItem>
+                            </ListBox></StackPanel>
+                        <StackPanel Spacing="4"><TextBlock Classes="label" Text="NAV"/>
+                            <ListBox Classes="nav" SelectedIndex="1" Width="200">
+                                <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Areas</ListBoxItem>
+                                <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Sources (selected)</ListBoxItem>
+                                <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Settings</ListBoxItem>
+                            </ListBox></StackPanel>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Orientation="Horizontal" Spacing="20">
+                        <StackPanel Spacing="4"><TextBlock Classes="label" Text="DEFAULT"/>
+                            <ListBox SelectedIndex="1" Width="200">
+                                <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">First</ListBoxItem>
+                                <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Second (selected)</ListBoxItem>
+                                <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Third</ListBoxItem>
+                            </ListBox></StackPanel>
+                        <StackPanel Spacing="4"><TextBlock Classes="label" Text="NAV"/>
+                            <ListBox Classes="nav" SelectedIndex="1" Width="200">
+                                <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Areas</ListBoxItem>
+                                <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Sources (selected)</ListBoxItem>
+                                <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Settings</ListBoxItem>
+                            </ListBox></StackPanel>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
     <ControlTheme x:Key="AppListBoxItemTheme" TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
         <Setter Property="Background" Value="{DynamicResource SurfaceRaisedBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>

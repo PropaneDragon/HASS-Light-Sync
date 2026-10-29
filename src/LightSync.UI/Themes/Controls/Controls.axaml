@@ -1,10 +1,43 @@
 <Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="12" Width="280">
+                        <TextBlock Classes="label" Text="NO EXPLICIT THEMES - SHOWS THE GLOBAL WIRING"/>
+                        <StackPanel Orientation="Horizontal" Spacing="8"><Button Content="Button"/><Button Classes="accent" Content="Accent"/></StackPanel>
+                        <TextBox Text="TextBox"/>
+                        <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch"><ComboBoxItem>ComboBox</ComboBoxItem></ComboBox>
+                        <CheckBox Content="CheckBox" IsChecked="True"/>
+                        <ProgressBar Value="60"/>
+                        <ListBox SelectedIndex="0"><ListBoxItem>ListBoxItem</ListBoxItem><ListBoxItem>Another</ListBoxItem></ListBox>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="12" Width="280">
+                        <TextBlock Classes="label" Text="NO EXPLICIT THEMES - SHOWS THE GLOBAL WIRING"/>
+                        <StackPanel Orientation="Horizontal" Spacing="8"><Button Content="Button"/><Button Classes="accent" Content="Accent"/></StackPanel>
+                        <TextBox Text="TextBox"/>
+                        <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch"><ComboBoxItem>ComboBox</ComboBoxItem></ComboBox>
+                        <CheckBox Content="CheckBox" IsChecked="True"/>
+                        <ProgressBar Value="60"/>
+                        <ListBox SelectedIndex="0"><ListBoxItem>ListBoxItem</ListBoxItem><ListBoxItem>Another</ListBoxItem></ListBox>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
     <Style Selector="Button"><Setter Property="Theme" Value="{DynamicResource AppButtonTheme}"/></Style>
     <Style Selector="TextBox"><Setter Property="Theme" Value="{DynamicResource AppTextBoxTheme}"/></Style>
     <Style Selector="ComboBox"><Setter Property="Theme" Value="{DynamicResource AppComboBoxTheme}"/></Style>
     <Style Selector="CheckBox"><Setter Property="Theme" Value="{DynamicResource AppCheckBoxTheme}"/></Style>
     <Style Selector="ProgressBar"><Setter Property="Theme" Value="{DynamicResource AppProgressBarTheme}"/></Style>
     <Style Selector="ListBoxItem"><Setter Property="Theme" Value="{DynamicResource AppListBoxItemTheme}"/></Style>
+    <Style Selector="DropDownButton"><Setter Property="Theme" Value="{DynamicResource AppDropDownButtonTheme}"/></Style>
     <Style Selector="ListBox">
         <Setter Property="ItemsPanel">
             <ItemsPanelTemplate><StackPanel Spacing="{DynamicResource SpacingS}"/></ItemsPanelTemplate>

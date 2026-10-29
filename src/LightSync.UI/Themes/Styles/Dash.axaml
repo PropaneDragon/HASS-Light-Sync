@@ -1,0 +1,32 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <Panel Width="240" Height="90">
+                        <Rectangle Classes="dash"/>
+                        <TextBlock Classes="muted" Text="Rectangle.dash" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Panel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <Panel Width="240" Height="90">
+                        <Rectangle Classes="dash"/>
+                        <TextBlock Classes="muted" Text="Rectangle.dash" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Panel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
+  <Style Selector="Rectangle.dash">
+    <Setter Property="IsHitTestVisible" Value="False"/>
+    <Setter Property="Stroke" Value="{DynamicResource OutlineStrongBrush}"/>
+    <Setter Property="StrokeThickness" Value="{DynamicResource DashThickness}"/>
+    <Setter Property="StrokeDashArray" Value="{DynamicResource DashPattern}"/>
+    <Setter Property="RadiusX" Value="{DynamicResource CornerRadiusCardValue}"/>
+    <Setter Property="RadiusY" Value="{DynamicResource CornerRadiusCardValue}"/>
+  </Style>
+</Styles>

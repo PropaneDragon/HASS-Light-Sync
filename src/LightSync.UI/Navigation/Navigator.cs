@@ -21,15 +21,15 @@ namespace LightSync.UI.Navigation
             _rootScope = root;
         }
 
-        public async Task NavigateToAsync(Type viewModelType, CancellationToken cancellationToken = default) => await NavigateToAsync(scope => (IPageViewModelBase)scope.Resolve(viewModelType), cancellationToken);
-        public async Task NavigateToAsync<TViewModel>(CancellationToken cancellationToken = default) where TViewModel : IPageViewModelBase => await NavigateToAsync(scope => scope.Resolve<TViewModel>(), cancellationToken);
+        public async Task NavigateToAsync(Type viewModelType, object? context = null, CancellationToken cancellationToken = default) => await NavigateToAsync(scope => (IPageViewModelBase)scope.Resolve(viewModelType), context, cancellationToken);
+        public async Task NavigateToAsync<TViewModel>(object? context = null, CancellationToken cancellationToken = default) where TViewModel : IPageViewModelBase => await NavigateToAsync(scope => scope.Resolve<TViewModel>(), context, cancellationToken);
 
         public void Dispose()
         {
             _pageScope?.Dispose();
         }
 
-        private async Task NavigateToAsync(Func<ILifetimeScope, IPageViewModelBase> viewModelFunc, CancellationToken cancellationToken = default)
+        private async Task NavigateToAsync(Func<ILifetimeScope, IPageViewModelBase> viewModelFunc, object? context = null, CancellationToken cancellationToken = default)
         {
             await (CurrentViewModel?.OnUnloadedAsync(cancellationToken) ?? Task.CompletedTask);
 
@@ -41,7 +41,7 @@ namespace LightSync.UI.Navigation
             _pageScope?.Dispose();
             _pageScope = pageScope;
 
-            await CurrentViewModel.OnLoadedAsync(cancellationToken);
+            await CurrentViewModel.OnLoadedAsync(context, cancellationToken);
         }
     }
 }

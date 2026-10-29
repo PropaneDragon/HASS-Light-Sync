@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace LightSync.UI.Progress
+﻿namespace LightSync.Core.Progress
 {
-    internal interface IProgressService : IDisposable
+    public interface IProgressService : IDisposable
     {
         bool IsIndeterminate { get; }
         double OverallProgressPercentage { get; }
@@ -20,7 +17,7 @@ namespace LightSync.UI.Progress
         void ShowProgress(IProgressInfo progressInfo);
     }
 
-    internal sealed class ProgressInfoEventArgs(IProgressInfo progressInfo) : EventArgs
+    public sealed class ProgressInfoEventArgs(IProgressInfo progressInfo) : EventArgs
     {
         public IProgressInfo ProgressInfo { get; } = progressInfo;
     }

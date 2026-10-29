@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:LightSync.UI.ViewModels.Dialogs"
+             x:Class="LightSync.UI.Views.Dialogs.SimpleDialogView"
+             x:DataType="vm:SimpleDialogViewModel">
+    <Border MinWidth="400">
+        <StackPanel Spacing="{DynamicResource SpacingXL}">
+            <TextBlock Classes="subtitle" Text="{Binding Message}" TextWrapping="Wrap" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="{DynamicResource SpacingM}">
+                <Border IsVisible="{Binding !IsDanger}">
+                    <Button Classes="accent" Command="{Binding AcceptButtonCommand}" IsVisible="{Binding AcceptText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Content="{Binding AcceptText}" />
+                </Border>
+                <Border IsVisible="{Binding IsDanger}">
+                    <Button Classes="danger solid" Command="{Binding AcceptButtonCommand}" IsVisible="{Binding AcceptText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Content="{Binding AcceptText}" />
+                </Border>
+                <Button Command="{Binding RejectButtonCommand}" IsVisible="{Binding RejectText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Content="{Binding RejectText}" />
+                <Button Command="{Binding CancelButtonCommand}" IsVisible="{Binding CancelText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Content="{Binding CancelText}" />
+                <Button Command="{Binding CloseButtonButtonCommand}" IsVisible="{Binding CloseText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Content="{Binding CloseText}" />
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

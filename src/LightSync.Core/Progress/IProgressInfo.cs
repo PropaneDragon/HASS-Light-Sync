@@ -1,9 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace LightSync.UI.Progress
+﻿namespace LightSync.Core.Progress
 {
-    internal interface IProgressInfo : IDisposable
+    public interface IProgressInfo : IDisposable
     {
         bool IsIndeterminate { get; set; }
         double ProgressPercentage { get; set; }
@@ -19,17 +16,17 @@ namespace LightSync.UI.Progress
         public void Complete();
     }
 
-    internal sealed class IsIndeterminateChangedEventArgs(bool isIndeterminate) : EventArgs
+    public sealed class IsIndeterminateChangedEventArgs(bool isIndeterminate) : EventArgs
     {
         public bool IsIndeterminate { get; } = isIndeterminate;
     }
 
-    internal sealed class ProgressPercentageChangedEventArgs(double progressPercentage) : EventArgs
+    public sealed class ProgressPercentageChangedEventArgs(double progressPercentage) : EventArgs
     {
         public double ProgressPercentage { get; } = progressPercentage;
     }
 
-    internal sealed class MessageChangedEventArgs(string? message) : EventArgs
+    public sealed class MessageChangedEventArgs(string? message) : EventArgs
     {
         public string? Message { get; } = message;
     }

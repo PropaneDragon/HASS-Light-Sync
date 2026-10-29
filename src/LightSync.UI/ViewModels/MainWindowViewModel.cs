@@ -1,14 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using LightSync.API.Plugins;
+using LightSync.Core.Progress;
 using LightSync.UI.Dialogs;
 using LightSync.UI.Navigation;
 using LightSync.UI.Plugins;
-using LightSync.UI.Progress;
 using LightSync.UI.ViewModels.Pages;
 using LightSync.UI.ViewModels.Progress;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.Marshalling;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -54,12 +54,29 @@ namespace LightSync.UI.ViewModels
             CurrentPage = _pages.First();
         }
 
-        public override async Task OnLoadedAsync(CancellationToken cancellationToken = default)
+        public override async Task OnLoadedAsync(object? context = null, CancellationToken cancellationToken = default)
         {
-            using var progressInfo = _progressInfoFactory.CreateAndShowProgressInfo("Loading plugins");
+            using var progressInfo = _progressInfoFactory.CreateAndShowProgressInfo("Finding plugins");
 
             await _pluginManager.LoadPluginsAsync(cancellationToken);
-            await base.OnLoadedAsync(cancellationToken);
+
+            progressInfo.Message = "Loading plugins";
+            progressInfo.IsIndeterminate = false;
+
+            var plugins = _pluginManager.Plugins;
+            if (plugins.Count > 0)
+            {
+                var pluginProgressStep = 100d / plugins.Count;
+
+                foreach (var plugin in _pluginManager.Plugins)
+                {
+                    _ = await plugin.InitialiseAsync(cancellationToken);
+
+                    progressInfo.ProgressPercentage += pluginProgressStep;
+                }
+            }
+
+            await base.OnLoadedAsync(context, cancellationToken);
         }
 
         partial void OnCurrentPageChanged(MainWindowPage oldValue, MainWindowPage newValue)
@@ -71,7 +88,7 @@ namespace LightSync.UI.ViewModels
         }
     }
 
-    public record MainWindowPage(string Title, string Icon, Type ViewModelType)
+    internal record MainWindowPage(string Title, string Icon, Type ViewModelType)
     {
     }
 }

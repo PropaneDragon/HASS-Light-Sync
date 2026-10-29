@@ -1,17 +1,68 @@
 <UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:areas="using:LightSync.UI.ViewModels.Areas"
+             xmlns:i="https://github.com/projektanker/icons.avalonia"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:design="using:LightSync.UI.Containers"
+             xmlns:icons.avalonia="https://github.com/projektanker/icons.avalonia"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:LightSync.UI.ViewModels.Pages"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LightSync.UI.Views.Pages.AreasPageView"
              x:DataType="vm:AreasPageViewModel">
 
-    <!--<Design.DataContext>
-        <vm:HomePageViewModel/>
-    </Design.DataContext>-->
+    <Design.DataContext>
+        <x:Static Member="design:DesignDataConfiguration.AreasPage" />
+    </Design.DataContext>
 
-    <Border>
+    <Border Padding="{DynamicResource PagePadding}">
+        <Grid RowDefinitions="Auto,*" RowSpacing="{DynamicResource SpacingXL}">
+            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                <Border Grid.Column="0">
+                    <StackPanel Spacing="{DynamicResource SpacingS}">
+                        <TextBlock Classes="heading" Text="Areas" />
+                        <TextBlock Classes="label" Text="Details" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1">
+                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource SpacingS}" VerticalAlignment="Top">
+                        <Button><i:Icon Value="fa7-pause" /></Button>
+                        <Button Classes="accent" Command="{Binding AddNewAreaCommand}">
+                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource SpacingS}">                                
+                                <i:Icon Value="fa7-plus" />
+                                <TextBlock>New area</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <Border Grid.Row="1">
+                <ItemsControl ItemsSource="{Binding AreasWithPlaceholder}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemSpacing="{DynamicResource SpacingL}" LineSpacing="{DynamicResource SpacingL}" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.DataTemplates>
 
+                        <DataTemplate DataType="areas:AreaDefinitionViewModel">
+                            <Border Classes="card" Width="400" Height="200">
+                                <Button Content="Edit" Command="{Binding $parent[UserControl].DataContext.EditAreaCommand}" CommandParameter="{Binding}" />
+                            </Border>                            
+                        </DataTemplate>
+
+                        <DataTemplate DataType="vm:CreateAreaPlaceholder">
+                            <Button Classes="add-card" Width="400" Height="200" Command="{Binding AddNewAreaCommand}">
+                                <StackPanel Orientation="Horizontal" Spacing="{DynamicResource SpacingS}">                                
+                                <i:Icon Value="fa7-plus" />
+                                <TextBlock>Create an area</TextBlock>
+                            </StackPanel>
+                            </Button>
+                        </DataTemplate>
+
+                    </ItemsControl.DataTemplates>
+                </ItemsControl>
+            </Border>
+        </Grid>
     </Border>
 </UserControl>

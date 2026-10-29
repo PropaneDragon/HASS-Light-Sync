@@ -1,5 +1,30 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="8">
+                        <CheckBox Theme="{DynamicResource AppCheckBoxTheme}" Content="Unchecked"/>
+                        <CheckBox Theme="{DynamicResource AppCheckBoxTheme}" IsChecked="True" Content="Checked"/>
+                        <CheckBox Theme="{DynamicResource AppCheckBoxTheme}" IsThreeState="True" IsChecked="{x:Null}" Content="Indeterminate"/>
+                        <CheckBox Theme="{DynamicResource AppCheckBoxTheme}" IsEnabled="False" Content="Disabled"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="8">
+                        <CheckBox Theme="{DynamicResource AppCheckBoxTheme}" Content="Unchecked"/>
+                        <CheckBox Theme="{DynamicResource AppCheckBoxTheme}" IsChecked="True" Content="Checked"/>
+                        <CheckBox Theme="{DynamicResource AppCheckBoxTheme}" IsThreeState="True" IsChecked="{x:Null}" Content="Indeterminate"/>
+                        <CheckBox Theme="{DynamicResource AppCheckBoxTheme}" IsEnabled="False" Content="Disabled"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
     <ControlTheme x:Key="AppCheckBoxTheme" TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
         <Setter Property="MinHeight" Value="{DynamicResource ControlMinHeight}"/>

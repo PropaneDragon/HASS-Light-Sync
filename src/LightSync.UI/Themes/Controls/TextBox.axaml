@@ -1,4 +1,27 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="12" Width="260">
+                        <TextBox Theme="{DynamicResource AppTextBoxTheme}" Text="Some text"/>
+                        <TextBox Theme="{DynamicResource AppTextBoxTheme}" PlaceholderText="Placeholder"/>
+                        <TextBox Theme="{DynamicResource AppTextBoxTheme}" IsEnabled="False" Text="Disabled"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="12" Width="260">
+                        <TextBox Theme="{DynamicResource AppTextBoxTheme}" Text="Some text"/>
+                        <TextBox Theme="{DynamicResource AppTextBoxTheme}" PlaceholderText="Placeholder"/>
+                        <TextBox Theme="{DynamicResource AppTextBoxTheme}" IsEnabled="False" Text="Disabled"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
     
     <ControlTheme x:Key="AppTextBoxTheme" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
         <Setter Property="Background" Value="{DynamicResource InputBackgroundBrush}"/>

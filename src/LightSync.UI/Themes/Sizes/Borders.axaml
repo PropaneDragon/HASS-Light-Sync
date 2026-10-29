@@ -1,7 +1,48 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:Avalonia.Collections">
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="12">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <StackPanel Spacing="4"><Border Width="96" Height="48" CornerRadius="{DynamicResource CornerRadiusSmall}" BorderThickness="{DynamicResource BorderThicknessDefault}" BorderBrush="{DynamicResource OutlineStrongBrush}" Background="{DynamicResource SurfaceBrush}"/><TextBlock Text="CornerRadiusSmall" Classes="caption"/></StackPanel>
+                            <StackPanel Spacing="4"><Border Width="96" Height="48" CornerRadius="{DynamicResource CornerRadiusControl}" BorderThickness="{DynamicResource BorderThicknessDefault}" BorderBrush="{DynamicResource OutlineStrongBrush}" Background="{DynamicResource SurfaceBrush}"/><TextBlock Text="CornerRadiusControl" Classes="caption"/></StackPanel>
+                            <StackPanel Spacing="4"><Border Width="96" Height="48" CornerRadius="{DynamicResource CornerRadiusCard}" BorderThickness="{DynamicResource BorderThicknessDefault}" BorderBrush="{DynamicResource OutlineStrongBrush}" Background="{DynamicResource SurfaceBrush}"/><TextBlock Text="CornerRadiusCard" Classes="caption"/></StackPanel>
+                            <StackPanel Spacing="4"><Border Width="96" Height="48" CornerRadius="{DynamicResource CornerRadiusPill}" BorderThickness="{DynamicResource BorderThicknessDefault}" BorderBrush="{DynamicResource OutlineStrongBrush}" Background="{DynamicResource SurfaceBrush}"/><TextBlock Text="CornerRadiusPill" Classes="caption"/></StackPanel>
+                        </StackPanel>
+                        <StackPanel Spacing="4"><Border Width="96" Height="48" BorderThickness="{DynamicResource BorderThicknessDefault}" BorderBrush="{DynamicResource AccentBrush}"/><TextBlock Text="BorderThicknessDefault" Classes="caption"/></StackPanel>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="12">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <StackPanel Spacing="4"><Border Width="96" Height="48" CornerRadius="{DynamicResource CornerRadiusSmall}" BorderThickness="{DynamicResource BorderThicknessDefault}" BorderBrush="{DynamicResource OutlineStrongBrush}" Background="{DynamicResource SurfaceBrush}"/><TextBlock Text="CornerRadiusSmall" Classes="caption"/></StackPanel>
+                            <StackPanel Spacing="4"><Border Width="96" Height="48" CornerRadius="{DynamicResource CornerRadiusControl}" BorderThickness="{DynamicResource BorderThicknessDefault}" BorderBrush="{DynamicResource OutlineStrongBrush}" Background="{DynamicResource SurfaceBrush}"/><TextBlock Text="CornerRadiusControl" Classes="caption"/></StackPanel>
+                            <StackPanel Spacing="4"><Border Width="96" Height="48" CornerRadius="{DynamicResource CornerRadiusCard}" BorderThickness="{DynamicResource BorderThicknessDefault}" BorderBrush="{DynamicResource OutlineStrongBrush}" Background="{DynamicResource SurfaceBrush}"/><TextBlock Text="CornerRadiusCard" Classes="caption"/></StackPanel>
+                            <StackPanel Spacing="4"><Border Width="96" Height="48" CornerRadius="{DynamicResource CornerRadiusPill}" BorderThickness="{DynamicResource BorderThicknessDefault}" BorderBrush="{DynamicResource OutlineStrongBrush}" Background="{DynamicResource SurfaceBrush}"/><TextBlock Text="CornerRadiusPill" Classes="caption"/></StackPanel>
+                        </StackPanel>
+                        <StackPanel Spacing="4"><Border Width="96" Height="48" BorderThickness="{DynamicResource BorderThicknessDefault}" BorderBrush="{DynamicResource AccentBrush}"/><TextBlock Text="BorderThicknessDefault" Classes="caption"/></StackPanel>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
     <Thickness x:Key="BorderThicknessDefault">1</Thickness>
     <CornerRadius x:Key="CornerRadiusSmall">4</CornerRadius>
     <CornerRadius x:Key="CornerRadiusControl">10</CornerRadius>
     <CornerRadius x:Key="CornerRadiusCard">14</CornerRadius>
     <CornerRadius x:Key="CornerRadiusPill">999</CornerRadius>
+    <x:Double x:Key="CornerRadiusCardValue">14</x:Double>
+    <x:Double x:Key="DashThickness">1</x:Double>
+    <c:AvaloniaList x:TypeArguments="x:Double" x:Key="DashPattern">
+        <x:Double>4</x:Double>
+        <x:Double>4</x:Double>
+    </c:AvaloniaList>
 </ResourceDictionary>

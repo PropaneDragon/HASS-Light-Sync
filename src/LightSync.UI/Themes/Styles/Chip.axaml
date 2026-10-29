@@ -1,12 +1,58 @@
-<!-- <Border Classes="chip"><TextBlock Text="Syncing"/></Border> -->
 <Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Border Classes="chip"><TextBlock Text="chip"/></Border>
+                        <Border Classes="chip accent"><TextBlock Text="accent"/></Border>
+                        <Border Classes="chip success"><TextBlock Text="success"/></Border>
+                        <Border Classes="chip warning"><TextBlock Text="warning"/></Border>
+                        <Border Classes="chip danger"><TextBlock Text="danger"/></Border>
+                        <Border Classes="chip selected"><TextBlock Text="selected"/></Border>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Border Classes="chip"><TextBlock Text="chip"/></Border>
+                        <Border Classes="chip accent"><TextBlock Text="accent"/></Border>
+                        <Border Classes="chip success"><TextBlock Text="success"/></Border>
+                        <Border Classes="chip warning"><TextBlock Text="warning"/></Border>
+                        <Border Classes="chip danger"><TextBlock Text="danger"/></Border>
+                        <Border Classes="chip selected"><TextBlock Text="selected"/></Border>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
     <Style Selector="Border.chip">
         <Setter Property="Background" Value="{DynamicResource SurfaceRaisedBrush}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="{DynamicResource BorderThicknessDefault}"/>
         <Setter Property="CornerRadius" Value="{DynamicResource CornerRadiusPill}"/>
         <Setter Property="Padding" Value="{DynamicResource ChipPadding}"/>
     </Style>
-    <Style Selector="Border.chip > TextBlock">
+    <Style Selector="Border.chip TextBlock">
         <Setter Property="FontSize" Value="{DynamicResource FontSizeCaption}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
     </Style>
+
+    <Style Selector="Border.chip.accent"><Setter Property="Background" Value="{DynamicResource AccentSubtleBrush}"/></Style>
+    <Style Selector="Border.chip.accent TextBlock"><Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/></Style>
+    <Style Selector="Border.chip.success"><Setter Property="Background" Value="{DynamicResource SuccessSubtleBrush}"/></Style>
+    <Style Selector="Border.chip.success TextBlock"><Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/></Style>
+    <Style Selector="Border.chip.warning"><Setter Property="Background" Value="{DynamicResource WarningSubtleBrush}"/></Style>
+    <Style Selector="Border.chip.warning TextBlock"><Setter Property="Foreground" Value="{DynamicResource WarningBrush}"/></Style>
+    <Style Selector="Border.chip.danger"><Setter Property="Background" Value="{DynamicResource DangerSubtleBrush}"/></Style>
+    <Style Selector="Border.chip.danger TextBlock"><Setter Property="Foreground" Value="{DynamicResource DangerBrush}"/></Style>
+
+    <Style Selector="Border.chip.selected">
+        <Setter Property="Background" Value="{DynamicResource AccentSubtleBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+    </Style>
+    <Style Selector="Border.chip.selected TextBlock"><Setter Property="Foreground" Value="{DynamicResource TextBrush}"/></Style>
 </Styles>

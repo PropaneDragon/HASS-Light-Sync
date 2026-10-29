@@ -1,0 +1,141 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="https://github.com/projektanker/icons.avalonia"
+             xmlns:behaviours="using:LightSync.UI.Behaviours"
+             xmlns:controls="using:LightSync.UI.Controls"
+             xmlns:lights="using:LightSync.UI.ViewModels.Lights"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:LightSync.UI.ViewModels.Pages"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="LightSync.UI.Views.Pages.EditAreaPageView"
+             x:DataType="vm:EditAreaPageViewModel">
+    
+    <Border Padding="{DynamicResource PagePadding}">
+        <Grid RowDefinitions="Auto,*" RowSpacing="{DynamicResource SpacingXL}">
+            <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="{DynamicResource SpacingXL}">
+
+                <Border Grid.Column="0">
+                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource SpacingS}" VerticalAlignment="Top">
+                        <Button Classes="nav" Command="{Binding GoBackCommand}">
+                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource SpacingS}">                                
+                                <i:Icon Value="fa7-chevron-left" />
+                                <TextBlock>Areas</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1">
+                    <StackPanel Spacing="{DynamicResource SpacingS}">
+                        <TextBlock Classes="heading" Text="Area info" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2">
+                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource SpacingS}" VerticalAlignment="Top">
+                        <Button Classes="danger" Command="{Binding DeleteAreaDefinitionCommand}"><i:Icon Value="fa7-trash" /></Button>
+                        <Button Classes="accent" Command="{Binding SaveAreaDefinitionCommand}">
+                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource SpacingS}">                                
+                                <i:Icon Value="fa7-floppy-disk" />
+                                <TextBlock>Save</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+            <Border Grid.Row="1">
+                <Grid ColumnSpacing="{DynamicResource SpacingL}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" MinWidth="280" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <Border Grid.Column="0">
+                        <Grid RowDefinitions="Auto,*" RowSpacing="{DynamicResource SpacingM}">
+                            <Grid Grid.Row="0" ColumnDefinitions="*,Auto" ColumnSpacing="{DynamicResource SpacingS}">
+                                <TextBox Grid.Column="0" Text="{Binding NameFilter, Delay=250}" PlaceholderText="Filter name">
+                                    <TextBox.InnerLeftContent>
+                                        <Border Padding="{DynamicResource ChipPadding}">
+                                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource SpacingS}">
+                                                <i:Icon Value="fa7-magnifying-glass" Classes="muted" />
+                                                <!--<TextBlock Classes="caption muted" Text="Name" />-->
+                                            </StackPanel>
+                                        </Border>
+                                    </TextBox.InnerLeftContent>
+                                </TextBox>
+
+                                <DropDownButton Grid.Column="1">
+                                    <i:Icon Value="fa7-filter" />
+                                    <DropDownButton.Flyout>
+                                        <Flyout Placement="BottomEdgeAlignedLeft">
+                                            Test
+                                        </Flyout>
+                                    </DropDownButton.Flyout>
+                                </DropDownButton>
+                            </Grid>
+
+                            <ItemsControl Grid.Row="1" ItemsSource="{Binding FilteredLights}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel ItemSpacing="{DynamicResource SpacingS}" LineSpacing="{DynamicResource SpacingS}" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="lights:LightEditorLightInfoViewModel">
+                                        <Border Classes="card compact" behaviours:Drag.CanDrag="True" behaviours:Drag.Data="{Binding}" Cursor="SizeAll">
+                                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource SpacingS}">
+                                                <i:Icon Classes="muted" VerticalAlignment="Center" Value="fa7-grip-vertical" />
+                                                <TextBlock VerticalAlignment="Center" Text="{Binding LightInfo.Name}" />
+                                                <Border Classes="chip selected" Margin="0,-8" VerticalAlignment="Center" IsVisible="{Binding HasLightPlacement}">
+                                                    <TextBlock Foreground="{DynamicResource AccentBrush}" Text="{Binding LightPlacementIndex}" />
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </Border>
+                    
+                    <Border Grid.Column="1">
+                        <Grid RowDefinitions="Auto,*">
+                            <Border Grid.Row="0">
+                                
+                            </Border>
+
+                            <Border Grid.Row="1">
+                                <Border Classes="card" Padding="0" ClipToBounds="True" behaviours:Drop.Command="{Binding LightDroppedCommand}">
+                                    <ItemsControl ItemsSource="{Binding PlacedLights}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <controls:NormalisedPanel />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.Styles>
+                                            <Style Selector="ItemsControl > ContentPresenter" x:DataType="lights:LightEditorLightInfoViewModel">
+                                                <Setter Property="controls:NormalisedPanel.X" Value="{Binding LightPlacementInfo.RelativePositionX}"/>
+                                                <Setter Property="controls:NormalisedPanel.Y" Value="{Binding LightPlacementInfo.RelativePositionY}"/>
+                                            </Style>
+                                        </ItemsControl.Styles>
+                                        <ItemsControl.DataTemplates>
+                                            <DataTemplate DataType="lights:LightEditorLightInfoViewModel">
+                                                <Border Classes="marker" behaviours:Drag.CanDrag="True" behaviours:Drag.Data="{Binding}" Cursor="SizeAll" IsVisible="{Binding HasLightPlacement}">
+                                                    <Border Classes="dot">
+                                                        <TextBlock Text="{Binding LightPlacementIndex}" />
+                                                    </Border>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.DataTemplates>
+                                    </ItemsControl>
+                                </Border>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

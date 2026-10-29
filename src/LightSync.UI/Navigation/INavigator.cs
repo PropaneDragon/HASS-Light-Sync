@@ -9,7 +9,7 @@ namespace LightSync.UI.Navigation
     {
         IPageViewModelBase? CurrentViewModel { get; }
 
-        Task NavigateToAsync(Type viewModelType, CancellationToken cancellationToken = default);
-        Task NavigateToAsync<TViewModel>(CancellationToken cancellationToken = default) where TViewModel : IPageViewModelBase;
+        Task NavigateToAsync(Type viewModelType, object? context = null, CancellationToken cancellationToken = default);
+        Task NavigateToAsync<TViewModel>(object? context = null, CancellationToken cancellationToken = default) where TViewModel : IPageViewModelBase;
     }
 }

@@ -41,16 +41,13 @@
     <ProjectReference Include="..\LightSync.API\LightSync.API.csproj" />
     <ProjectReference Include="..\LightSync.Core\LightSync.Core.csproj" />
     <ProjectReference Include="..\LightSync.HomeAssistant\LightSync.HomeAssistant.csproj" ReferenceOutputAssembly="false" BundledPlugin="true" />
+    <ProjectReference Include="..\LightSync.VideoCapture\LightSync.VideoCapture.csproj" ReferenceOutputAssembly="false" BundledPlugin="true" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Views\Pages\AreasPageView.axaml.cs">
       <DependentUpon>AreasPageView.axaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Dialogs\" />
   </ItemGroup>
 
   <Target Name="BundlePlugins" AfterTargets="Build" Condition="'$(DesignTimeBuild)' != 'true'">

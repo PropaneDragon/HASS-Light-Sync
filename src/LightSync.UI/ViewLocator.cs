@@ -1,5 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
+using LightSync.UI.ViewModels;
+using LightSync.UI.ViewModels.Dialogs;
 using LightSync.UI.ViewModels.Pages;
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -30,9 +32,6 @@ namespace LightSync.UI
             return new TextBlock { Text = "Not Found: " + name };
         }
 
-        public bool Match(object? data)
-        {
-            return data is PageViewModelBase;
-        }
+        public bool Match(object? data) => data is IViewLocatableViewModel;
     }
 }

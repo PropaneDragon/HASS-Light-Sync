@@ -1,4 +1,42 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="8">
+                        <TextBlock FontFamily="{DynamicResource AppFontFamily}" Text="AppFontFamily: The quick brown fox"/>
+                        <TextBlock FontSize="{DynamicResource FontSizeCaption}" Text="FontSizeCaption - Light sync"/>
+                        <TextBlock FontSize="{DynamicResource FontSizeBody}" Text="FontSizeBody - Light sync"/>
+                        <TextBlock FontSize="{DynamicResource FontSizeSubtitle}" Text="FontSizeSubtitle - Light sync"/>
+                        <TextBlock FontSize="{DynamicResource FontSizeTitle}" Text="FontSizeTitle - Light sync"/>
+                        <TextBlock FontSize="{DynamicResource FontSizeHeading}" Text="FontSizeHeading - Light sync"/>
+                        <TextBlock FontWeight="{DynamicResource FontWeightRegular}" Text="FontWeightRegular - Light sync"/>
+                        <TextBlock FontWeight="{DynamicResource FontWeightMedium}" Text="FontWeightMedium - Light sync"/>
+                        <TextBlock FontWeight="{DynamicResource FontWeightSemiBold}" Text="FontWeightSemiBold - Light sync"/>
+                        <TextBlock FontWeight="{DynamicResource FontWeightBold}" Text="FontWeightBold - Light sync"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="8">
+                        <TextBlock FontFamily="{DynamicResource AppFontFamily}" Text="AppFontFamily: The quick brown fox"/>
+                        <TextBlock FontSize="{DynamicResource FontSizeCaption}" Text="FontSizeCaption - Light sync"/>
+                        <TextBlock FontSize="{DynamicResource FontSizeBody}" Text="FontSizeBody - Light sync"/>
+                        <TextBlock FontSize="{DynamicResource FontSizeSubtitle}" Text="FontSizeSubtitle - Light sync"/>
+                        <TextBlock FontSize="{DynamicResource FontSizeTitle}" Text="FontSizeTitle - Light sync"/>
+                        <TextBlock FontSize="{DynamicResource FontSizeHeading}" Text="FontSizeHeading - Light sync"/>
+                        <TextBlock FontWeight="{DynamicResource FontWeightRegular}" Text="FontWeightRegular - Light sync"/>
+                        <TextBlock FontWeight="{DynamicResource FontWeightMedium}" Text="FontWeightMedium - Light sync"/>
+                        <TextBlock FontWeight="{DynamicResource FontWeightSemiBold}" Text="FontWeightSemiBold - Light sync"/>
+                        <TextBlock FontWeight="{DynamicResource FontWeightBold}" Text="FontWeightBold - Light sync"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
     <FontFamily x:Key="AppFontFamily">Inter, Segoe UI, Arial</FontFamily>
     <x:Double x:Key="FontSizeCaption">12</x:Double>
     <x:Double x:Key="FontSizeBody">14</x:Double>

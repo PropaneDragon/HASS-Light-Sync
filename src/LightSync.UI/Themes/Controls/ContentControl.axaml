@@ -1,0 +1,44 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <ContentControl Theme="{DynamicResource EmptyStateTheme}" Width="280" MinHeight="120">
+                        <StackPanel Spacing="6" HorizontalAlignment="Center">
+                            <TextBlock Classes="subtitle" Text="No lights available" HorizontalAlignment="Center"/>
+                            <TextBlock Classes="muted" Text="Connect a plugin to add lights." HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </ContentControl>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <ContentControl Theme="{DynamicResource EmptyStateTheme}" Width="280" MinHeight="120">
+                        <StackPanel Spacing="6" HorizontalAlignment="Center">
+                            <TextBlock Classes="subtitle" Text="No lights available" HorizontalAlignment="Center"/>
+                            <TextBlock Classes="muted" Text="Connect a plugin to add lights." HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </ContentControl>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="EmptyStateTheme" TargetType="ContentControl">
+        <Setter Property="Padding" Value="{DynamicResource CardPadding}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <Rectangle Classes="dash"/>
+                    <ContentPresenter Padding="{TemplateBinding Padding}"
+                                      Content="{TemplateBinding Content}"
+                                      HorizontalContentAlignment="Center"
+                                      VerticalContentAlignment="Center"/>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

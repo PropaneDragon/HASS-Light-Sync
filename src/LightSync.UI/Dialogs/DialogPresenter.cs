@@ -15,6 +15,9 @@ namespace LightSync.UI.Dialogs
         public partial bool IsOpen { get; private set; }
 
         [ObservableProperty]
+        public partial string Title { get; private set; } = string.Empty;
+
+        [ObservableProperty]
         public partial IDialogViewModelBase? CurrentViewModel { get; private set; }
 
         public DialogPresenter(ILifetimeScope rootScope)
@@ -22,7 +25,10 @@ namespace LightSync.UI.Dialogs
             _rootScope = rootScope;
         }
 
-        public async Task<TResult?> ShowAsync<TViewModel, TResult>(CancellationToken cancellationToken = default) where TViewModel : IDialogViewModelBase<TResult>
+        public async Task<DialogResult> ShowSimpleAsync(string title, string message, string? acceptText = null, string? rejectText = null, string? cancelText = null, string? closeText = null, AcceptButtonType acceptButtonType = AcceptButtonType.Accent) =>
+            await ShowAsync<ISimpleDialogViewModel, DialogResult>(new SimpleDialogData(title, message, acceptText, rejectText, cancelText, closeText, acceptButtonType));
+
+        public async Task<TResult?> ShowAsync<TViewModel, TResult>(object? context = null, CancellationToken cancellationToken = default) where TViewModel : IDialogViewModelBase<TResult>
         {
             if (IsOpen)
                 CurrentViewModel?.Cancel();
@@ -32,8 +38,11 @@ namespace LightSync.UI.Dialogs
 
             CurrentViewModel = viewModel;
             IsOpen = true;
+            Title = CurrentViewModel.Title;
 
-            await (CurrentViewModel?.OnLoadedAsync(cancellationToken) ?? Task.CompletedTask);
+            await (CurrentViewModel.OnLoadedAsync(context, cancellationToken) ?? Task.CompletedTask);
+
+            Title = CurrentViewModel.Title;
 
             try
             {
@@ -44,7 +53,7 @@ namespace LightSync.UI.Dialogs
                 IsOpen = false;
 
                 await (CurrentViewModel?.OnUnloadedAsync(cancellationToken) ?? Task.CompletedTask);
-                await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken); //Allow for any animations
+                await Task.Delay(TimeSpan.FromMilliseconds(200), cancellationToken); //Allow for any animations
 
                 CurrentViewModel = null;
             }

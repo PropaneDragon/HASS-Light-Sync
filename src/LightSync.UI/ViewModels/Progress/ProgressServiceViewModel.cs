@@ -1,6 +1,6 @@
 ﻿using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
-using LightSync.UI.Progress;
+using LightSync.Core.Progress;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;

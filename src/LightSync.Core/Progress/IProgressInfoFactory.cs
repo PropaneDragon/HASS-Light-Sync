@@ -1,12 +1,12 @@
-﻿namespace LightSync.UI.Progress
+﻿namespace LightSync.Core.Progress
 {
-    internal enum ProgressType
+    public enum ProgressType
     {
         Indeterminate,
         Normal
     }
 
-    internal interface IProgressInfoFactory
+    public interface IProgressInfoFactory
     {
         IProgressInfo CreateProgressInfo(string? message = null, ProgressType progressType = ProgressType.Indeterminate);
         IProgressInfo CreateAndShowProgressInfo(string? message = null, ProgressType progress = ProgressType.Indeterminate);

@@ -1,5 +1,68 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Classes="label" Text="SPACING (width)"/>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="{DynamicResource SpacingXS}" Height="12" Background="{DynamicResource AccentBrush}"/><TextBlock Text="SpacingXS" Classes="caption"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="{DynamicResource SpacingS}" Height="12" Background="{DynamicResource AccentBrush}"/><TextBlock Text="SpacingS" Classes="caption"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="{DynamicResource SpacingM}" Height="12" Background="{DynamicResource AccentBrush}"/><TextBlock Text="SpacingM" Classes="caption"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="{DynamicResource SpacingL}" Height="12" Background="{DynamicResource AccentBrush}"/><TextBlock Text="SpacingL" Classes="caption"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="{DynamicResource SpacingXL}" Height="12" Background="{DynamicResource AccentBrush}"/><TextBlock Text="SpacingXL" Classes="caption"/></StackPanel>
+                        <TextBlock Classes="label" Text="SIZES (height)"/>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="48" Height="{DynamicResource ControlMinHeight}" Background="{DynamicResource AccentBrush}"/><TextBlock Text="ControlMinHeight" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="48" Height="{DynamicResource ProgressBarThickness}" Background="{DynamicResource AccentBrush}"/><TextBlock Text="ProgressBarThickness" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="48" Height="{DynamicResource SubProgressBarThickness}" Background="{DynamicResource AccentBrush}"/><TextBlock Text="SubProgressBarThickness" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="48" Height="{DynamicResource MarkerSize}" Background="{DynamicResource AccentBrush}"/><TextBlock Text="MarkerSize" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="48" Height="{DynamicResource HandleSize}" Background="{DynamicResource AccentBrush}"/><TextBlock Text="HandleSize" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <TextBlock Classes="label" Text="PADDING"/>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource HeaderPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="HeaderPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource ButtonPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="ButtonPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource InputPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="InputPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource NavPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="NavPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource ChipPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="ChipPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource CardPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="CardPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource CardCompactPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="CardCompactPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource PagePadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="PagePadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource DialogPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="DialogPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource DropDownPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="DropDownPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Classes="label" Text="SPACING (width)"/>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="{DynamicResource SpacingXS}" Height="12" Background="{DynamicResource AccentBrush}"/><TextBlock Text="SpacingXS" Classes="caption"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="{DynamicResource SpacingS}" Height="12" Background="{DynamicResource AccentBrush}"/><TextBlock Text="SpacingS" Classes="caption"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="{DynamicResource SpacingM}" Height="12" Background="{DynamicResource AccentBrush}"/><TextBlock Text="SpacingM" Classes="caption"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="{DynamicResource SpacingL}" Height="12" Background="{DynamicResource AccentBrush}"/><TextBlock Text="SpacingL" Classes="caption"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="{DynamicResource SpacingXL}" Height="12" Background="{DynamicResource AccentBrush}"/><TextBlock Text="SpacingXL" Classes="caption"/></StackPanel>
+                        <TextBlock Classes="label" Text="SIZES (height)"/>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="48" Height="{DynamicResource ControlMinHeight}" Background="{DynamicResource AccentBrush}"/><TextBlock Text="ControlMinHeight" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="48" Height="{DynamicResource ProgressBarThickness}" Background="{DynamicResource AccentBrush}"/><TextBlock Text="ProgressBarThickness" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="48" Height="{DynamicResource SubProgressBarThickness}" Background="{DynamicResource AccentBrush}"/><TextBlock Text="SubProgressBarThickness" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="48" Height="{DynamicResource MarkerSize}" Background="{DynamicResource AccentBrush}"/><TextBlock Text="MarkerSize" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Width="48" Height="{DynamicResource HandleSize}" Background="{DynamicResource AccentBrush}"/><TextBlock Text="HandleSize" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <TextBlock Classes="label" Text="PADDING"/>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource HeaderPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="HeaderPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource ButtonPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="ButtonPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource InputPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="InputPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource NavPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="NavPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource ChipPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="ChipPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource CardPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="CardPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource CardCompactPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="CardCompactPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource PagePadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="PagePadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource DialogPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="DialogPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12"><Border Background="{DynamicResource SurfaceRaisedBrush}" Padding="{DynamicResource DropDownPadding}"><Border Width="40" Height="10" Background="{DynamicResource AccentBrush}"/></Border><TextBlock Text="DropDownPadding" Classes="caption" VerticalAlignment="Center"/></StackPanel>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
     <x:Double x:Key="SpacingXS">4</x:Double>
     <x:Double x:Key="SpacingS">8</x:Double>
     <x:Double x:Key="SpacingM">12</x:Double>
@@ -10,6 +73,8 @@
     <x:Double x:Key="DialogMaxWidth">520</x:Double>
     <x:Double x:Key="ProgressBarThickness">8</x:Double>
     <x:Double x:Key="SubProgressBarThickness">6</x:Double>
+    <x:Double x:Key="MarkerSize">28</x:Double>  
+    <x:Double x:Key="HandleSize">16</x:Double>
 
     <Thickness x:Key="HeaderPadding">16</Thickness>
     <Thickness x:Key="ButtonPadding">18,0</Thickness>
@@ -17,7 +82,12 @@
     <Thickness x:Key="NavPadding">14,0</Thickness>
     <Thickness x:Key="ChipPadding">10,4</Thickness>
     <Thickness x:Key="CardPadding">20</Thickness>
+    <Thickness x:Key="CardCompactPadding">10</Thickness>
     <Thickness x:Key="PagePadding">32,28</Thickness>
     <Thickness x:Key="DialogPadding">20</Thickness>
+    <Thickness x:Key="DropDownPadding">18,0,38,0</Thickness>
+    <Thickness x:Key="DropDownChevronMargin">0,0,14,0</Thickness>
+    <Thickness x:Key="MarkerBorderThickness">2</Thickness>
+    <Thickness x:Key="MarkerRingThickness">3</Thickness>
 
 </ResourceDictionary>

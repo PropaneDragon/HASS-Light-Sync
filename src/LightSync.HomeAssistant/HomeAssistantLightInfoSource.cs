@@ -33,6 +33,11 @@ namespace LightSync.HomeAssistant
 
         public async Task InitialiseAsync(CancellationToken cancellationToken = default)
         {
+            await RefreshAsync(cancellationToken);
+        }
+
+        public async Task RefreshAsync(CancellationToken cancellationToken = default)
+        {
             if (!_connectionManager.IsConnected)
                 await _connectionManager.ConnectAsync(cancellationToken).ConfigureAwait(false);
 

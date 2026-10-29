@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LightSync.Core\LightSync.Core.csproj" />
     <ProjectReference Include="..\LightSync.HomeAssistant\LightSync.HomeAssistant.csproj" />
   </ItemGroup>
 

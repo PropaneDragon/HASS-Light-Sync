@@ -1,7 +1,11 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
+using LightSync.Core.Areas;
+using LightSync.UI.Collections;
 using LightSync.UI.Navigation;
-using LightSync.UI.Plugins;
+using LightSync.UI.ViewModels.Areas;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,43 +16,52 @@ namespace LightSync.UI.ViewModels.Pages
     internal partial class AreasPageViewModel : PageViewModelBase, IAreasPageViewModel
     {
         private readonly INavigator _navigator;
-        private readonly IPluginManager _pluginManager;
+        private readonly IAreaDefinitionFactory _areaDefinitionFactory;
+        private readonly IAreaManager _areaManager;
 
-        [ObservableProperty]
-        public partial bool IsLoadingPlugins { get; private set; } = true;
+        public ObservableCollection<AreaDefinitionViewModel> Areas { get; }
+        public TrailingObservableCollection<AreaDefinitionViewModel> AreasWithPlaceholder { get; }
 
-        public AreasPageViewModel(INavigator navigator, IPluginManager pluginManager)
+        public AreasPageViewModel(INavigator navigator, IAreaDefinitionFactory areaDefinitionFactory, IAreaManager areaManager)
         {
             _navigator = navigator;
-            _pluginManager = pluginManager;
+            _areaDefinitionFactory = areaDefinitionFactory;
+            _areaManager = areaManager;
+
+            Areas = [.. areaManager.Areas.Select(area => new AreaDefinitionViewModel(area))];
+            AreasWithPlaceholder = new(Areas, new CreateAreaPlaceholder(AddNewArea));
         }
 
-        public override async Task OnLoadedAsync(CancellationToken cancellationToken = default)
+        public override async Task OnLoadedAsync(object? context = null, CancellationToken cancellationToken = default)
         {
-            await LoadPlugins(cancellationToken);
-            await base.OnLoadedAsync(cancellationToken);
-        }
-
-        private async Task LoadPlugins(CancellationToken cancellationToken = default)
-        {
-            IsLoadingPlugins = true;
-
-            await _pluginManager.LoadPluginsAsync(cancellationToken);
-
-            var plugins = _pluginManager.Plugins;
-            foreach (var plugin in plugins)
-            {
-                await Task.Run(async () => await plugin.InitialiseAsync(cancellationToken));
-                await Task.Run(async () => await plugin.LightInfoSource.InitialiseAsync(cancellationToken), cancellationToken);
-            }
-
-            IsLoadingPlugins = false;
+            await base.OnLoadedAsync(context, cancellationToken);
         }
 
         [RelayCommand]
-        private async Task NavigateToConfigureArea(CancellationToken cancellationToken = default)
+        private async Task AddNewArea()
         {
-            await _navigator.NavigateToAsync<IAreaConfigurationViewModel>(cancellationToken);
+            var area = _areaDefinitionFactory.CreateEmptyArea();
+            await _navigator.NavigateToAsync<IEditAreaPageViewModel>(area);
+        }
+
+        [RelayCommand]
+        private async Task EditArea(AreaDefinitionViewModel? areaDefinition)
+        {
+            if (areaDefinition == null)
+                return;
+
+            await _navigator.NavigateToAsync<IEditAreaPageViewModel>(areaDefinition.AssociatedAreaDefinition);
+        }
+    }
+
+    internal partial class CreateAreaPlaceholder(Func<Task> addFunc)
+    {
+        private readonly Func<Task> _addFunc = addFunc;
+
+        [RelayCommand]
+        private async Task AddNewArea()
+        {
+            await _addFunc.Invoke();
         }
     }
 }

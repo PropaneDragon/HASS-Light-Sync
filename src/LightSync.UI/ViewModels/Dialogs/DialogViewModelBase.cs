@@ -4,9 +4,11 @@ using System.Threading.Tasks;
 
 namespace LightSync.UI.ViewModels.Dialogs
 {
-    internal interface IDialogViewModelBase
+    internal interface IDialogViewModelBase : IViewLocatableViewModel
     {
-        public Task OnLoadedAsync(CancellationToken cancellationToken = default);
+        public string Title { get; }
+
+        public Task OnLoadedAsync(object? context = null, CancellationToken cancellationToken = default);
         public Task OnUnloadedAsync(CancellationToken cancellationToken = default);
 
         void Cancel();
@@ -17,12 +19,15 @@ namespace LightSync.UI.ViewModels.Dialogs
         TaskCompletionSource<TResult?> CompletedTask { get; }
     }
 
-    internal abstract class DialogViewModelBase<TResult> : ObservableObject, IDialogViewModelBase<TResult>
+    internal abstract partial class DialogViewModelBase<TResult> : ObservableObject, IDialogViewModelBase<TResult>
     {
+        [ObservableProperty]
+        public partial string Title { get; protected set; } = string.Empty;
+
         public TaskCompletionSource<TResult?> CompletedTask { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
         public virtual void Cancel() => Close();
-        public virtual async Task OnLoadedAsync(CancellationToken cancellationToken = default) { }
+        public virtual async Task OnLoadedAsync(object? context = null, CancellationToken cancellationToken = default) { }
         public virtual async Task OnUnloadedAsync(CancellationToken cancellationToken = default) { }
 
         protected void Close(TResult? result = default) => CompletedTask.TrySetResult(result);

@@ -1,5 +1,49 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="12">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <Button Theme="{DynamicResource AppButtonTheme}" Content="Default"/>
+                            <Button Theme="{DynamicResource AppButtonTheme}" Classes="accent" Content="Accent"/>
+                            <Button Theme="{DynamicResource AppButtonTheme}" Classes="danger" Content="Danger"/>
+                            <Button Theme="{DynamicResource AppButtonTheme}" Classes="danger solid" Content="Danger solid"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <Button Theme="{DynamicResource AppButtonTheme}" IsEnabled="False" Content="Disabled"/>
+                            <Button Theme="{DynamicResource AppButtonTheme}" Classes="accent" IsEnabled="False" Content="Accent disabled"/>
+                            <Button Theme="{DynamicResource AppButtonTheme}" Classes="nav" Content="Nav item"/>
+                            <Button Theme="{DynamicResource AppButtonTheme}" Classes="nav selected" Content="Nav selected"/>
+                        </StackPanel>
+                        <Button Theme="{DynamicResource AppButtonTheme}" Classes="add-card" Width="260" Height="72" Content="+ Create"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="12">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <Button Theme="{DynamicResource AppButtonTheme}" Content="Default"/>
+                            <Button Theme="{DynamicResource AppButtonTheme}" Classes="accent" Content="Accent"/>
+                            <Button Theme="{DynamicResource AppButtonTheme}" Classes="danger" Content="Danger"/>
+                            <Button Theme="{DynamicResource AppButtonTheme}" Classes="danger solid" Content="Danger solid"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <Button Theme="{DynamicResource AppButtonTheme}" IsEnabled="False" Content="Disabled"/>
+                            <Button Theme="{DynamicResource AppButtonTheme}" Classes="accent" IsEnabled="False" Content="Accent disabled"/>
+                            <Button Theme="{DynamicResource AppButtonTheme}" Classes="nav" Content="Nav item"/>
+                            <Button Theme="{DynamicResource AppButtonTheme}" Classes="nav selected" Content="Nav selected"/>
+                        </StackPanel>
+                        <Button Theme="{DynamicResource AppButtonTheme}" Classes="add-card" Width="260" Height="72" Content="+ Create"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
+
     <ControlTheme x:Key="AppButtonTheme" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Background" Value="{DynamicResource SurfaceRaisedBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
@@ -25,6 +69,11 @@
         </Style>
 
         <Style Selector="^.accent">
+            <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextOnAccentBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+        </Style>
+        <Style Selector="^.accent /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
             <Setter Property="Foreground" Value="{DynamicResource TextOnAccentBrush}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
@@ -56,6 +105,70 @@
             <Setter Property="Background" Value="{DynamicResource SurfaceRaisedBrush}"/>
             <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+
+        <Style Selector="^.add-card">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+            <Setter Property="CornerRadius" Value="{DynamicResource CornerRadiusCard}"/>
+            <Setter Property="Padding" Value="{DynamicResource CardPadding}"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Panel>
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Background="{TemplateBinding Background}"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          CornerRadius="{TemplateBinding CornerRadius}"
+                                          Padding="{TemplateBinding Padding}"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Rectangle Name="PART_Dash" IsHitTestVisible="False" Classes="dash"/>
+                    </Panel>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="^.add-card:pointerover /template/ Rectangle#PART_Dash">
+            <Setter Property="Stroke" Value="{DynamicResource AccentBrush}"/>
+        </Style>
+        <Style Selector="^.add-card:pressed /template/ Rectangle#PART_Dash">
+            <Setter Property="Stroke" Value="{DynamicResource AccentPressedBrush}"/>
+        </Style>
+
+        <Style Selector="^.danger">
+            <Setter Property="Foreground" Value="{DynamicResource DangerBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="^.danger:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource DangerSubtleBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource DangerBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}"/>
+        </Style>
+        <Style Selector="^.danger:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource DangerSubtlePressedBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource DangerBrush}"/>
+        </Style>
+        <Style Selector="^.danger:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="BorderBrush" Value="{DynamicResource OutlineBrush}"/>
+        </Style>
+
+        <Style Selector="^.danger.solid">
+            <Setter Property="Background" Value="{DynamicResource DangerBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextOnDangerBrush}"/>
+        </Style>
+        <Style Selector="^.danger.solid:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource DangerBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextOnDangerBrush}"/>
+            <Setter Property="Opacity" Value="0.9"/>
+        </Style>
+        <Style Selector="^.danger.solid:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource DangerBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextOnDangerBrush}"/>
+            <Setter Property="Opacity" Value="0.8"/>
         </Style>
 
     </ControlTheme>

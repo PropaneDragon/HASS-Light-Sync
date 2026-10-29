@@ -1,0 +1,29 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <FlyoutPresenter MinWidth="240">
+                        <StackPanel Spacing="8"><TextBlock Classes="label" Text="FLYOUT"/><CheckBox Content="Option one" IsChecked="True"/><CheckBox Content="Option two"/></StackPanel>
+                    </FlyoutPresenter>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <FlyoutPresenter MinWidth="240">
+                        <StackPanel Spacing="8"><TextBlock Classes="label" Text="FLYOUT"/><CheckBox Content="Option one" IsChecked="True"/><CheckBox Content="Option two"/></StackPanel>
+                    </FlyoutPresenter>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <Style Selector="FlyoutPresenter">
+        <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource OutlineStrongBrush}"/>
+        <Setter Property="BorderThickness" Value="{DynamicResource BorderThicknessDefault}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource CornerRadiusCard}"/>
+        <Setter Property="Padding" Value="{DynamicResource CardPadding}"/>
+    </Style>
+</Styles>

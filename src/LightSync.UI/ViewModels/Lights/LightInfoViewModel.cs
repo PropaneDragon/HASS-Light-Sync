@@ -4,7 +4,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using LightSync.API.Lights;
 using LightSync.UI.Extensions;
 using System;
-using System.Diagnostics.Contracts;
 using System.Threading;
 
 namespace LightSync.UI.ViewModels.Lights

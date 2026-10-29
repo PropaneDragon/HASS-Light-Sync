@@ -1,4 +1,38 @@
 <Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="12" Width="340">
+                        <TextBlock Classes="heading" Text="Heading"/>
+                        <TextBlock Classes="muted" Text="Muted description text"/>
+                        <Border Classes="card"><StackPanel Spacing="10">
+                            <StackPanel Orientation="Horizontal" Spacing="8"><Border Classes="chip success"><TextBlock Text="Syncing"/></Border><Border Classes="chip"><TextBlock Text="4 lights"/></Border></StackPanel>
+                            <TextBox Text="Living room TV"/>
+                            <StackPanel Orientation="Horizontal" Spacing="8"><Button Content="Cancel"/><Button Classes="accent" Content="Save"/><Button Classes="danger" Content="Delete"/></StackPanel>
+                            <ProgressBar Value="60"/>
+                        </StackPanel></Border>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Spacing="12" Width="340">
+                        <TextBlock Classes="heading" Text="Heading"/>
+                        <TextBlock Classes="muted" Text="Muted description text"/>
+                        <Border Classes="card"><StackPanel Spacing="10">
+                            <StackPanel Orientation="Horizontal" Spacing="8"><Border Classes="chip success"><TextBlock Text="Syncing"/></Border><Border Classes="chip"><TextBlock Text="4 lights"/></Border></StackPanel>
+                            <TextBox Text="Living room TV"/>
+                            <StackPanel Orientation="Horizontal" Spacing="8"><Button Content="Cancel"/><Button Classes="accent" Content="Save"/><Button Classes="danger" Content="Delete"/></StackPanel>
+                            <ProgressBar Value="60"/>
+                        </StackPanel></Border>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
     <Styles.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -8,18 +42,28 @@
                 <ResourceInclude Source="avares://LightSync.UI/Themes/Sizes/Spacing.axaml"/>
                 <ResourceInclude Source="avares://LightSync.UI/Themes/Sizes/Borders.axaml"/>
                 <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/Button.axaml"/>
+                <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/ToggleButton.axaml"/>
                 <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/TextBox.axaml"/>
                 <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/ComboBox.axaml"/>
                 <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/CheckBox.axaml"/>
                 <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/ProgressBar.axaml"/>
                 <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/ListBoxItem.axaml"/>
+                <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/ContentControl.axaml"/>
+                <ResourceInclude Source="avares://LightSync.UI/Themes/Controls/DropDownButton.axaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Styles.Resources>
+
     <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Base.axaml"/>
     <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Text.axaml"/>
+    <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Icon.axaml"/>
     <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Card.axaml"/>
     <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Chip.axaml"/>
+    <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Dash.axaml"/>
+    <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Flyout.axaml"/>
+    <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Marker.axaml"/>
+    <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Segmented.axaml"/>
     <StyleInclude Source="avares://LightSync.UI/Themes/Styles/Navigation.axaml"/>
+
     <StyleInclude Source="avares://LightSync.UI/Themes/Controls/Controls.axaml"/>
 </Styles>

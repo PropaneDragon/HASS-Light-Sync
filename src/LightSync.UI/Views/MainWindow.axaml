@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:LightSync.UI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:design="using:LightSync.UI.Containers"
         xmlns:emit="using:System.Reflection.Emit"
         xmlns:i="https://github.com/projektanker/icons.avalonia"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -14,9 +15,9 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="Light sync">
 
-    <!--<Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>-->
+    <Design.DataContext>
+        <x:Static Member="design:DesignDataConfiguration.MainWindow" />
+    </Design.DataContext>
 
     <Window.Resources>
         <converters:BoolToValueConverter
@@ -28,7 +29,7 @@
     <Grid>
 
         <Border>
-            <Grid ColumnDefinitions="200,*">
+            <Grid ColumnDefinitions="230,*">
                 <Grid Grid.Column="0" RowDefinitions="*,Auto">
                     <Border Grid.Row="0" BorderBrush="{DynamicResource OutlineBrush}" BorderThickness="0,0,1,0">
                         <StackPanel Spacing="{DynamicResource SpacingS}">
@@ -68,12 +69,14 @@
             <Border Background="{DynamicResource ScrimBrush}" />
             <Border
                 Classes="card"
-                Margin=""
                 MaxWidth="{DynamicResource DialogMaxWidth}"
                 Padding="{DynamicResource DialogPadding}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
-                <ContentControl Content="{Binding DialogService.CurrentViewModel}"/>
+                <StackPanel Spacing="{DynamicResource SpacingXL}">
+                    <TextBlock Classes="title" Text="{Binding DialogService.Title}"/>
+                    <ContentControl Content="{Binding DialogService.CurrentViewModel}"/>
+                </StackPanel>
             </Border>
         </Grid>
 

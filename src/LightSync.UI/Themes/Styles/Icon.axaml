@@ -1,0 +1,36 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="https://github.com/projektanker/icons.avalonia">
+
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal">
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Orientation="Horizontal" Spacing="16">
+                        <i:Icon Value="fa7-rotate" Classes="heading"/><i:Icon Value="fa7-rotate" Classes="title"/><i:Icon Value="fa7-rotate" Classes="subtitle"/>
+                        <i:Icon Value="fa7-rotate"/><i:Icon Value="fa7-rotate" Classes="caption"/><i:Icon Value="fa7-rotate" Classes="muted"/><i:Icon Value="fa7-rotate" Classes="label"/>
+                        <i:Icon Value="fa7-rotate" Classes="success"/><i:Icon Value="fa7-rotate" Classes="warning"/><i:Icon Value="fa7-rotate" Classes="danger"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+            <ThemeVariantScope RequestedThemeVariant="Light">
+                <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                    <StackPanel Orientation="Horizontal" Spacing="16">
+                        <i:Icon Value="fa7-rotate" Classes="heading"/><i:Icon Value="fa7-rotate" Classes="title"/><i:Icon Value="fa7-rotate" Classes="subtitle"/>
+                        <i:Icon Value="fa7-rotate"/><i:Icon Value="fa7-rotate" Classes="caption"/><i:Icon Value="fa7-rotate" Classes="muted"/><i:Icon Value="fa7-rotate" Classes="label"/>
+                        <i:Icon Value="fa7-rotate" Classes="success"/><i:Icon Value="fa7-rotate" Classes="warning"/><i:Icon Value="fa7-rotate" Classes="danger"/>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <Style Selector="i|Icon.heading"><Setter Property="FontSize" Value="{DynamicResource FontSizeHeading}"/><Setter Property="FontWeight" Value="{DynamicResource FontWeightBold}"/></Style>
+    <Style Selector="i|Icon.title"><Setter Property="FontSize" Value="{DynamicResource FontSizeTitle}"/><Setter Property="FontWeight" Value="{DynamicResource FontWeightSemiBold}"/></Style>
+    <Style Selector="i|Icon.subtitle"><Setter Property="FontSize" Value="{DynamicResource FontSizeSubtitle}"/><Setter Property="FontWeight" Value="{DynamicResource FontWeightSemiBold}"/></Style>
+    <Style Selector="i|Icon.caption"><Setter Property="FontSize" Value="{DynamicResource FontSizeCaption}"/></Style>
+    <Style Selector="i|Icon.muted"><Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/></Style>
+    <Style Selector="i|Icon.label"><Setter Property="FontSize" Value="{DynamicResource FontSizeCaption}"/><Setter Property="FontWeight" Value="{DynamicResource FontWeightSemiBold}"/><Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/></Style>
+    <Style Selector="i|Icon.success"><Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/></Style>
+    <Style Selector="i|Icon.warning"><Setter Property="Foreground" Value="{DynamicResource WarningBrush}"/></Style>
+    <Style Selector="i|Icon.danger"><Setter Property="Foreground" Value="{DynamicResource DangerBrush}"/></Style>
+</Styles>

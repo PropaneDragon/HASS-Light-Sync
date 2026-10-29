@@ -1,0 +1,81 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+    <StackPanel Orientation="Horizontal">
+        <ThemeVariantScope RequestedThemeVariant="Dark">
+            <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                <StackPanel Spacing="16">
+                    <ListBox Classes="segmented" SelectedIndex="2">
+                        <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">System</ListBoxItem>
+                        <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Light</ListBoxItem>
+                        <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Dark</ListBoxItem>
+                    </ListBox>
+                    <ListBox Classes="segmented" SelectedIndex="0">
+                        <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Comfortable</ListBoxItem>
+                        <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Compact</ListBoxItem>
+                    </ListBox>
+                    <ListBox Classes="segmented" SelectedIndex="1" IsEnabled="False">
+                        <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Standard</ListBoxItem>
+                        <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">High (disabled)</ListBoxItem>
+                    </ListBox>
+                </StackPanel>
+            </Border>
+        </ThemeVariantScope>
+        <ThemeVariantScope RequestedThemeVariant="Light">
+            <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
+                <StackPanel Spacing="16">
+                    <ListBox Classes="segmented" SelectedIndex="2">
+                        <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">System</ListBoxItem>
+                        <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Light</ListBoxItem>
+                        <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Dark</ListBoxItem>
+                    </ListBox>
+                    <ListBox Classes="segmented" SelectedIndex="0">
+                        <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Comfortable</ListBoxItem>
+                        <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Compact</ListBoxItem>
+                    </ListBox>
+                    <ListBox Classes="segmented" SelectedIndex="1" IsEnabled="False">
+                        <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">Standard</ListBoxItem>
+                        <ListBoxItem Theme="{DynamicResource AppListBoxItemTheme}">High (disabled)</ListBoxItem>
+                    </ListBox>
+                </StackPanel>
+            </Border>
+        </ThemeVariantScope>
+    </StackPanel>
+</Design.PreviewWith>
+
+    <Style Selector="ListBox.segmented">
+        <Setter Property="Background" Value="{DynamicResource InputBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource OutlineStrongBrush}"/>
+        <Setter Property="BorderThickness" Value="{DynamicResource BorderThicknessDefault}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource CornerRadiusControl}"/>
+        <Setter Property="Padding" Value="{DynamicResource SegmentedPadding}"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="(ScrollViewer.HorizontalScrollBarVisibility)" Value="Disabled"/>
+        <Setter Property="(ScrollViewer.VerticalScrollBarVisibility)" Value="Disabled"/>
+        <Setter Property="ItemsPanel">
+            <ItemsPanelTemplate><UniformGrid Rows="1"/></ItemsPanelTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="ListBox.segmented ListBoxItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="{DynamicResource BorderThicknessDefault}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource CornerRadiusControl}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource SegmentedItemMinHeight}"/>
+        <Setter Property="Padding" Value="{DynamicResource ButtonPadding}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+        <Setter Property="FontWeight" Value="{DynamicResource FontWeightMedium}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="ListBox.segmented ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SurfaceHoverBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+    </Style>
+    <Style Selector="ListBox.segmented ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentSubtleBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+    </Style>
+</Styles>

@@ -3,7 +3,7 @@ using LightSync.API.Plugins;
 
 namespace LightSync.HomeAssistant
 {
-    public class HomeAssistantPlugin : IPlugin
+    public class HomeAssistantPlugin : LightPlugin
     {
         private readonly ConnectionManager _connectionManager = new();
         private readonly HomeAssistantLightInfoSource _lightInfoSource;
@@ -13,11 +13,11 @@ namespace LightSync.HomeAssistant
             _lightInfoSource = new(_connectionManager);
         }
 
-        public string Name => "Home Assistant Plugin";
+        public override string Name => "Home Assistant Light Sources";
 
-        public ILightInfoSource LightInfoSource => _lightInfoSource;
+        public override ILightInfoSource LightInfoSource => _lightInfoSource;
 
-        public async Task<bool> InitialiseAsync(CancellationToken cancellationToken = default)
+        protected override async Task<bool> InitialiseInternalAsync(CancellationToken cancellationToken = default)
         {
             if (!await _connectionManager.ConnectAsync(cancellationToken))
                 return false;
@@ -25,11 +25,8 @@ namespace LightSync.HomeAssistant
             return true;
         }
 
-        public async ValueTask DisposeAsync()
+        protected override async Task DisposeInternalAsync()
         {
-            GC.SuppressFinalize(this);
-
-            await _lightInfoSource.DisposeAsync();
             await _connectionManager.DisposeAsync();
         }
     }

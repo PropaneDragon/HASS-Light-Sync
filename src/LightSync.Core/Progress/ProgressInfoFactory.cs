@@ -1,6 +1,6 @@
-﻿namespace LightSync.UI.Progress
+﻿namespace LightSync.Core.Progress
 {
-    internal class ProgressInfoFactory : IProgressInfoFactory
+    public class ProgressInfoFactory : IProgressInfoFactory
     {
         private readonly IProgressService _progressService;
 
