@@ -57,6 +57,7 @@ namespace LightSync.Core.Captures
 
         public void Dispose()
         {
+            _processTask = null;
             _processCancellationTokenSource?.Cancel();
             _processCancellationTokenSource?.Dispose();
         }

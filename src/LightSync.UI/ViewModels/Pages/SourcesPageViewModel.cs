@@ -30,6 +30,9 @@ namespace LightSync.UI.ViewModels.Pages
         private DateTimeOffset _lastCapture = DateTimeOffset.MinValue;
 
         [ObservableProperty]
+        public partial CaptureInfoViewModel? SelectedSource { get; set; }
+
+        [ObservableProperty]
         public partial IReadOnlyList<CaptureInfoViewModel> Sources { get; private set; } = [];
 
         [ObservableProperty]
@@ -58,12 +61,6 @@ namespace LightSync.UI.ViewModels.Pages
         private void SynchroniseSourcesFromPlugins()
         {
             Sources = [.. _pluginManager.CapturePlugins.SelectMany(plugin => plugin.CaptureInfoSource.Captures).Select(capture => new CaptureInfoViewModel(capture))];
-
-            var testSource = Sources.LastOrDefault();
-            if (testSource != null)
-            {
-                _captureLease = _captureManager.AcquireLease(testSource.AssociatedCaptureInfo);
-            }
             //UpdateFilter();
         }
 
@@ -109,6 +106,21 @@ namespace LightSync.UI.ViewModels.Pages
             (_front, _back) = (_back,  _front);
 
             PreviewBitmap = _front;
+        }
+
+        partial void OnSelectedSourceChanged(CaptureInfoViewModel? oldValue, CaptureInfoViewModel? newValue)
+        {
+            oldValue?.IsSelected = false;
+
+            _captureLease?.Dispose();
+            _captureLease = null;
+
+            if (SelectedSource == null)
+                return;
+
+            _captureLease = _captureManager.AcquireLease(SelectedSource.AssociatedCaptureInfo);
+
+            newValue?.IsSelected = true;
         }
     }
 }

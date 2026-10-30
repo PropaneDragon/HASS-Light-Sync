@@ -9,6 +9,9 @@ namespace LightSync.UI.ViewModels.Captures
         public ICaptureInfo AssociatedCaptureInfo { get; init; }
 
         [ObservableProperty]
+        public partial bool IsSelected { get; set; }
+
+        [ObservableProperty]
         public partial string? Name { get; private set; }
 
         [ObservableProperty]

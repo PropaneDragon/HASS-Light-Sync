@@ -6,6 +6,7 @@
                 <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
                     <StackPanel Spacing="12">
                         <StackPanel Orientation="Horizontal" Spacing="12">
+                            <ToggleButton Theme="{DynamicResource AppButtonTheme}" Content="Default"/>
                             <Button Theme="{DynamicResource AppButtonTheme}" Content="Default"/>
                             <Button Theme="{DynamicResource AppButtonTheme}" Classes="accent" Content="Accent"/>
                             <Button Theme="{DynamicResource AppButtonTheme}" Classes="danger" Content="Danger"/>
@@ -25,6 +26,7 @@
                 <Border Padding="20" Background="{DynamicResource BackgroundBrush}" TextElement.Foreground="{DynamicResource TextBrush}">
                     <StackPanel Spacing="12">
                         <StackPanel Orientation="Horizontal" Spacing="12">
+                            <ToggleButton Theme="{DynamicResource AppButtonTheme}" Content="Default"/>
                             <Button Theme="{DynamicResource AppButtonTheme}" Content="Default"/>
                             <Button Theme="{DynamicResource AppButtonTheme}" Classes="accent" Content="Accent"/>
                             <Button Theme="{DynamicResource AppButtonTheme}" Classes="danger" Content="Danger"/>
@@ -86,6 +88,11 @@
         <Style Selector="^.accent:pressed /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource AccentPressedBrush}"/>
             <Setter Property="Foreground" Value="{DynamicResource TextOnAccentBrush}"/>
+        </Style>
+        <Style Selector="^:checked /template/ ContentPresenter#PART_ContentPresenter">
+          <Setter Property="Background" Value="{DynamicResource AccentSubtleBrush}"/>
+          <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+          <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
         </Style>
 
         <Style Selector="^.nav">

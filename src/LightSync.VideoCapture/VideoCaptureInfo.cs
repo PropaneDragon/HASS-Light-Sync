@@ -23,7 +23,13 @@ namespace LightSync.VideoCapture
 
         public async Task<ICaptureSession> OpenAsync(int maxWidth, int maxHeight, CancellationToken cancellationToken = default)
         {
-            var display = _displayManager.GetDevice(_displayInfo, new() { DrawMouse = false });
+            var display = _displayManager.GetDevice(_displayInfo, new()
+            {
+                DrawMouse = false,
+                VideoSize = (_displayInfo.Width, _displayInfo.Height),
+                VideoPosition = (_displayInfo.X, _displayInfo.Y)
+            });
+
             display.StartCapture();
 
             return new VideoCaptureSession(display, maxWidth, maxHeight);

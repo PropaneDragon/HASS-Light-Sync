@@ -32,6 +32,7 @@
     </Design.PreviewWith>
 
     <Style Selector="Button"><Setter Property="Theme" Value="{DynamicResource AppButtonTheme}"/></Style>
+    <Style Selector="ToggleButton"><Setter Property="Theme" Value="{DynamicResource AppButtonTheme}"/></Style>
     <Style Selector="TextBox"><Setter Property="Theme" Value="{DynamicResource AppTextBoxTheme}"/></Style>
     <Style Selector="ComboBox"><Setter Property="Theme" Value="{DynamicResource AppComboBoxTheme}"/></Style>
     <Style Selector="CheckBox"><Setter Property="Theme" Value="{DynamicResource AppCheckBoxTheme}"/></Style>

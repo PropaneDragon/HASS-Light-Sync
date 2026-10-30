@@ -59,7 +59,7 @@ namespace LightSync.VideoCapture
 
                     (Width, Height) = FitSize(_lastFrame.Width, _lastFrame.Height);
 
-                    _frameConverter ??= new FrameConverter(_lastFrame.Width, _lastFrame.Height, PixelFormat.Rgba, Width, Height);
+                    _frameConverter ??= new FrameConverter(_lastFrame.Width, _lastFrame.Height, _lastFrame.PixelFormat, Width, Height, PixelFormat.Rgba);
 
                     var convertedFrame = _frameConverter.Convert(_lastFrame);
                     if (!convertedFrame.RawData.TryCopyTo(pixels))

@@ -35,22 +35,35 @@
                         <ColumnDefinition Width="1*" MinWidth="280" />
                         <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
-                
+
                     <Border Grid.Column="0">
-                        <ItemsControl ItemsSource="{Binding Sources}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Spacing="{DynamicResource SpacingL}" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
+                        <ListBox
+                        Classes="nav"
+                        Margin="{DynamicResource NavPadding}"
+                        SelectedItem="{Binding SelectedSource}"
+                        ItemsSource="{Binding Sources}">
+                            <ListBox.ItemTemplate>
                                 <DataTemplate DataType="captures:CaptureInfoViewModel">
-                                    <Border Classes="card compact">
+                                    <Border Classes="card compact" Classes.selected="{Binding IsSelected}">
                                         <TextBlock Text="{Binding Name}" />
                                     </Border>
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <!--<ItemsControl ItemsSource="{Binding Sources}">
+                        <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                        <StackPanel Spacing="{DynamicResource SpacingL}" />
+                        </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="captures:CaptureInfoViewModel">
+                        <Border Classes="card compact" Classes.selected="{Binding IsSelected}">
+                        <TextBlock Text="{Binding Name}" />
+                        </Border>
+                        </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        </ItemsControl>-->
                     </Border>
 
                     <Border Grid.Column="1" Classes="card" Padding="0" ClipToBounds="True" VerticalAlignment="Stretch">
